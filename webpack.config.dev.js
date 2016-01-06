@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './src/index'
+    './index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -15,6 +15,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}, minimize: true}),
     new webpack.NoErrorsPlugin()
   ],
   module: {
@@ -24,24 +25,16 @@ module.exports = {
         loaders: [ 'babel' ],
         exclude: /node_modules/,
         include: __dirname
-      }
+      },{
+        test: /\.less$/,
+        loader: 'style!css!less'
+      }, {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
     ]
   }
-}
+};
 
 
-// When insisafelyde Redux repo, prefer src to compiled version.
-// You can  delete these lines in your project.
-var reduxSrc = path.join(__dirname, '..', '..', 'src')
-var reduxNodeModules = path.join(__dirname, '..', '..', 'node_modules')
-var fs = require('fs')
-if (fs.existsSync(reduxSrc) && fs.existsSync(reduxNodeModules)) {
-  // Resolve Redux to source
-  module.exports.resolve = { alias: { 'redux': reduxSrc } }
-  // Compile Redux from source
-  module.exports.module.loaders.push({
-    test: /\.js$/,
-    loaders: [ 'babel' ],
-    include: reduxSrc
-  })
-}
