@@ -3,27 +3,21 @@ import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 import Header from '../components/Header';
 import * as CounterActions from '../actions/counter';
-import React from 'react';
-import DevTools from './DevTools';
+import React,{Component} from 'react';
 
-let App = React.createClass({
+
+class App  extends Component{
   render() {
     return (
       <div className="wrapper">
-        <Counter />
+        <Counter counter={this.props.counter} actions={this.props.actions} />
       </div>
     )
   }
-});
+}
 
-function mapStateToProps(state) {
-  return {
+export default connect(state=>({
     counter: state.counter
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CounterActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+}), dispatch =>({
+  actions: bindActionCreators(CounterActions, dispatch)
+}))(App);

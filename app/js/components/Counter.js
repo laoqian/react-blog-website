@@ -9,10 +9,10 @@ class Counter extends Component {
       height:'30px'
     };
 
-    const { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    const { increment, incrementIfOdd, incrementAsync, decrement } = this.props.actions;
     return (
       <p  >
-        Clicked: {counter} times
+        Clicked: {this.props.counter} times
         {' '}
         <button style={styles} onClick={increment}>+</button>
         {' '}
