@@ -11,7 +11,6 @@ let App = React.createClass({
     return (
       <div className="wrapper">
         <Counter />
-        <DevTools />
       </div>
     )
   }
