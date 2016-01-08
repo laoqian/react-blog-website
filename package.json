@@ -7,7 +7,9 @@
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "start": "node devServer.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -45,7 +47,7 @@
     "jsdom": "^5.6.1",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
-    "mocha": "^2.2.5",
+    "mocha": "^2.3.4",
     "node-libs-browser": "^0.5.2",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-hmr": "^1.0.0",

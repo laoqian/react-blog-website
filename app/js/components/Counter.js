@@ -27,11 +27,7 @@ class Counter extends Component {
 }
 
 Counter.propTypes = {
-  increment: PropTypes.func.isRequired,
-  incrementIfOdd: PropTypes.func.isRequired,
-  incrementAsync: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-  counter: PropTypes.number.isRequired
+ actions: PropTypes.object.isRequired,
 };
 
 export default Counter;
