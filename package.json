@@ -31,9 +31,12 @@
   "author": "qixian yu <858385135@qq.com> (http://github.com/gaearon)",
   "license": "CC0-1.0",
   "dependencies": {
+    "history": "^1.17.0",
+    "isomorphic-fetch": "^2.2.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
+    "react-router": "^1.0.3",
     "redux": "^3.0.0",
     "redux-thunk": "^0.1.0"
   },

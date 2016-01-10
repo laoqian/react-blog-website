@@ -6,8 +6,6 @@ import TableComponent from '../components/Table';
 import * as user_search from '../actions/search';
 import React,{Component} from 'react';
 
-import {fetchUser} from '../actions/search'
-
 
 class App  extends Component{
   render() {
@@ -16,20 +14,15 @@ class App  extends Component{
         <Header/>
         <SearchBar counter={this.props.count}
                    actions={this.props.actions} />
+        <TableComponent user = {this.props.user}/>
       </div>
     )
   }
 }
 
-
-function mapStateToProps(state){
-  return {
-    id:111,
-    sd:22
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  fetchUser
-)(App);
+export default connect(state=>({
+    count: state.count,
+    user : state.user
+}), dispatch =>({
+  actions: bindActionCreators(user_search, dispatch)
+}))(App);
