@@ -27,11 +27,28 @@ body{
   top:62px;
   left: 0;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  ul{
+    list-style: none;
+    padding: 0;
+    li{
+      text-align: left;
+      height: 30px;
+      padding-bottom: 2px;
+      &:hover{
+        cursor: pointer;
+      }
+      ul{
+        display: none;
+      }
+    }
+  }
 }
 
 .main-right{
   width: 90%;
-  background: blue;
+  background: #f0f0f0;
   position: fixed;
   top:62px;
   right: 0;
