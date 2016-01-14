@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+import mainMenu from './mainMenu';
 import table from './table';
 
 
 const rootReducer = combineReducers({
-  count:counter,
+  mainMenu,
   user:table
 });
 

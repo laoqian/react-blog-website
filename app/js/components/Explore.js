@@ -6,8 +6,8 @@ export default class SearchBar extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.setInputValue(nextProps.value);
+    if (nextProps.id !== this.props.id) {
+      this.setInputValue(nextProps.id);
     }
   }
   getInputValue() {
@@ -18,9 +18,7 @@ export default class SearchBar extends Component {
   }
 
   handleOnClick(){
-    let value = this.getInputValue();
-    alert(value);
-    this.props.onChange(this.getInputValue());
+    this.props.search(this.getInputValue());
   }
   render() {
     return (
@@ -29,8 +27,7 @@ export default class SearchBar extends Component {
         <input type="text"
                placeholder="用户ID"
                ref="input"
-               defaultValue={this.props.value}
-               value="1234455"/>
+               defaultValue={this.props.id}/>
         <button onClick={this.handleOnClick}>
           确定
         </button>
@@ -40,7 +37,7 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  id: PropTypes.number.isRequired,
+  search: PropTypes.func.isRequired
 };
 

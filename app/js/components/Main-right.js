@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 
-class Header extends Component {
+class MainRight extends Component {
 
   render() {
     return (
-      <div className="header-bar">
+      <div className="main-right">
         <div>欢迎使用木鱼后台管理系统</div>
       </div>
     )
@@ -13,4 +13,4 @@ class Header extends Component {
 
 
 
-export default Header;
+export default MainRight;
