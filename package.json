@@ -3,13 +3,8 @@
   "version": "1.0.0",
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
-    "clean": "rimraf dist",
-    "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
     "start": "node devServer.js",
-    "lint": "eslint src",
-    "test": "mocha --compilers js:babel/register --recursive",
-    "test:watch": "npm test -- --watch"
+    "test":"set DEBUG=* && node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +28,7 @@
   "dependencies": {
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.0",
+    "jquery": "^2.2.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",

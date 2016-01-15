@@ -21,33 +21,31 @@ body{
 }
 
 .main-left{
-  width: 10%;
+  width: 100%;
   background: darken(#f0f0aa,10%);
   position: fixed;
   top:62px;
   left: 0;
   bottom: 0;
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
+  padding-left: 50px;
   ul{
     list-style: none;
     padding: 0;
+    display: block;
     li{
       text-align: left;
-      height: 30px;
       padding-bottom: 2px;
       &:hover{
         cursor: pointer;
-      }
-      ul{
-        display: none;
       }
     }
   }
 }
 
 .main-right{
-  width: 90%;
+  width: 0%;
   background: #f0f0f0;
   position: fixed;
   top:62px;

@@ -1,17 +1,23 @@
-import { USER_SEARCH } from '../actions/search'
+import { MENU_CLICK } from '../actions/menuAction'
+import  {Menu} from '../lib/menu'
 
-const Menus = ['板块管理','主题管理','回复管理'];
-const subMenu = {
-  "板块管理":['111','222','333'],
-  "主题管理":['444','233','366'],
-  "回复管理":['555','244','355']
-};
+var menuArr =[
+  {pid:0,name:"菜单1"},
+  {pid:1,name:"菜单2"},
+  {pid:1,name:"菜单3"},
+  {pid:1,name:"菜单5"},
 
+];
 
-export default function mainMenu(state = {Menus,subMenu}, action) {
+var menu = new Menu();
+
+menu.addByArr(menuArr);
+
+export default function mainMenu(state = menu.get(), action) {
   switch (action.type) {
-    case USER_SEARCH:
-      return action.id;
+    case MENU_CLICK:
+      menu.subChangeStateById(action.id)
+      return menu.get();
     default:
       return state
   }
