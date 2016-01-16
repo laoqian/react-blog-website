@@ -21,22 +21,24 @@ body{
 }
 
 .main-left{
-  width: 100%;
+  width: 10%;
   background: darken(#f0f0aa,10%);
   position: fixed;
   top:62px;
   left: 0;
   bottom: 0;
-  //display: flex;
-  //justify-content: center;
-  padding-left: 50px;
+  display: flex;
+  justify-content: center;
   ul{
     list-style: none;
     padding: 0;
     display: block;
+    width: 100%;
     li{
-      text-align: left;
-      padding-bottom: 2px;
+      line-height: 40px;
+      vertical-align: middle;
+      text-align: center;
+      width: 100%;
       &:hover{
         cursor: pointer;
       }
@@ -45,7 +47,7 @@ body{
 }
 
 .main-right{
-  width: 0%;
+  width: 90%;
   background: #f0f0f0;
   position: fixed;
   top:62px;

@@ -10,7 +10,6 @@ class MainLeft extends Component {
   }
 
   render() {
-    console.log('MainLeft');
     return (
       <div className="main-left">
         <Menus menu={this.props.menu} onChange={this.props.onChange}/>

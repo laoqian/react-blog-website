@@ -7,42 +7,28 @@ class Menus extends Component {
   }
 
   onMenuClick(){
-    this.props.onChange(1);
+    this.change(this.id);
   }
 
-  //renderMenu(menus){
-  //  return  menus.map(menu=>{
-  //    menu.change = this.props.onChange;
-  //    console.log(`id ${menu.id} display:${menu.style.display}`);
-  //    return(
-  //      <div>
-  //        <li onClick={this.onMenuClick.bind(menu)}
-  //            style={menu.style}>
-  //            {menu.name}
-  //        </li>
-  //        {this.renderMenu(menu.sub)}
-  //      </div>
-  //    )
-  //  });
-  //}
+  renderMenu(menus){
+    return  menus.map(menu=>{
+      return(
+        <div key={menu.id}>
+          <li onClick={this.onMenuClick.bind({change:this.props.onChange,id:menu.id})}
+              style={menu.style}>
+              {menu.prefix}{menu.name}
+          </li>
+          {this.renderMenu(menu.sub)}
+        </div>
+      )
+    });
+  }
 
   render(){
     const menus = this.props.menu;
-    console.log(1111);
     return (
       <ul>
-        {
-          menus.map(menu=>(
-            <div>
-              <li onClick={this.onMenuClick.bind(this)} style={menu.style}>{menu.name}</li>
-              {menu.sub.map(sub=>(
-                <li onClick={this.onMenuClick.bind(this)} style={sub.style}>
-                  {sub.name}
-                </li>
-              ))}
-            </div>
-            ))
-        }
+        {this.renderMenu(menus)}
       </ul>
       )
   }

@@ -14,6 +14,14 @@ export function Menu(){
 
 }
 
+var deepStyle=[
+  {background:'red',color:'black',height:'40px'},
+  {background:'orange',color:'black',height:'40px'},
+  {background:'yellow',color:'black',height:'40px'},
+  {background:'green',color:'black',height:'40px'},
+  {background:'blue',color:'black',height:'40px'}
+];
+
 Menu.prototype.init = function (menu) {
   if(!menu.id){
     menu.id = this.count(this.tree);
@@ -42,7 +50,7 @@ Menu.prototype.init = function (menu) {
   }else{
     menu.style.display='block';
   }
-
+  menu.prefix ='';
   menu.sub = [];
 }
 
@@ -61,13 +69,24 @@ Menu.prototype.count = function menuCount(tree){
 Menu.prototype.add = function(menu)
 {
   this.init(menu);
-  this.__add(this.tree,menu);
+  this.__add(this.tree,menu,0);
 }
 
-Menu.prototype.__add = function menuAdd(tree,menu){
+Menu.prototype.__add = function menuAdd(tree,menu,deep){
   if(tree.id == menu.pid){
     if(!tree.sub){
       tree.sub =[];
+    }
+    var style = deepStyle[deep];
+    //var padding = `${deep*10}px`;
+    //menu.style['paddingLeft'] = padding;
+    for(var key in style){
+      if(!menu.style[key])
+        menu.style[key] = style[key];
+    }
+
+    if(tree.prefix!='-'){
+      tree.prefix='+';
     }
 
     return tree.sub.push(menu);
@@ -78,14 +97,14 @@ Menu.prototype.__add = function menuAdd(tree,menu){
   }
 
   for(var i=0;i<tree.sub.length;i++){
-    this.__add(tree.sub[i],menu);
+    this.__add(tree.sub[i],menu,deep+1);
   }
 }
 
 Menu.prototype.addByArr = function menuAddByArr(arr){
   for(var i=0;i<arr.length;i++){
     this.init(arr[i]);
-    this.__add(this.tree,arr[i]);
+    this.__add(this.tree,arr[i],0);
   }
 }
 
@@ -169,16 +188,18 @@ Menu.prototype.getSubByName = function(name){
   return this.__search(this.tree,'name',name);
 }
 
-Menu.prototype.subChangeState = function(tree){
+Menu.prototype.subChangeState = function(tree,show){
 
-  tree.subShow = !tree.subShow;
-  if(tree.sub){
+  tree.subShow = show;
+
+  if(tree.sub.length>0){
     for(var i=0;i<tree.sub.length;i++){
-      if(tree.subShow){
+      if(show){
         tree.sub[i].style.display='block';
       }else{
         tree.sub[i].style.display='none';
       }
+      this.subChangeState(tree.sub[i],false);
     }
 
     return true;
@@ -187,13 +208,48 @@ Menu.prototype.subChangeState = function(tree){
   return false;
 }
 
-Menu.prototype.subChangeStateById = function(id){
+Menu.prototype.subChangeStateById = function(id,mutex){
   var tree = this.__search(this.tree,'id',id);
 
-  this.subChangeState(tree);
+  tree.subShow = !tree.subShow;
+
+  this.subChangeState(tree,tree.subShow);
+  this.addPrefix(tree);
+
+  if(!tree.subShow) return;
+
+  //互斥其他菜单
+  if(mutex){
+    var parent = this.__search(this.tree,'id',tree.pid);
+    for(var i=0;i<parent.sub.length;i++){
+      var child = parent.sub[i];
+      if(child.id!=tree.id){
+        this.subChangeState(child,false);
+        this.addPrefix(child);
+      }
+    }
+  }
 
 }
 
-Menu.prototype.get = function (){
-  return this.tree.sub;
+Menu.prototype.addPrefix = function(tree){
+
+  if(tree.sub.length>0){
+      if(tree.subShow){
+        tree.prefix ="-";
+      }else{
+        tree.prefix ="+";
+      }
+
+    for(var i=0;i<tree.sub.length;i++){
+      this.addPrefix(tree.sub[i]);
+    }
+  }else{
+    tree.prefix='';
+  }
+}
+
+Menu.prototype.get = function(){
+  var tree = this.tree.sub.slice(0,this.tree.sub.length);
+  return tree;
 }

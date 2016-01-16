@@ -235,13 +235,22 @@ menu.addByArr(menuArr);
 menu.addChildbyName('菜单7',{name:"菜单8"});
 
 
+var immutalbe  = require('immutable');
 
+var test = immutalbe.Map({a:111});
 
+debug(test.get('a'));
 
-menu.show();
-//menu.delChildbyName('菜单1');
-//menu.delChildbyName('菜单7');
+var sss = test.set('a',222);
+debug(test.get('a'));
+debug(sss.get('a'));
 
-menu.subChangeStateById(1);
-menu.show()
-//mymenu.show();
+//
+//
+//menu.show();
+////menu.delChildbyName('菜单1');
+////menu.delChildbyName('菜单7');
+//
+//menu.subChangeStateById(1);
+//menu.show()
+////mymenu.show();

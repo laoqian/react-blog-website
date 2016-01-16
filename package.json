@@ -4,7 +4,7 @@
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
     "start": "node devServer.js",
-    "test":"set DEBUG=* && node test/test.js"
+    "test": "set DEBUG=* && node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "license": "CC0-1.0",
   "dependencies": {
     "history": "^1.17.0",
+    "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.2.0",
     "react": "^0.14.0",
