@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
-    "start": "node devServer.js",
+    "start": "set NODE_ENV = development && node devServer.js",
     "test": "set DEBUG=* && node test/test.js"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.3",
+    "express": "^4.13.3",
     "redux": "^3.0.0",
     "redux-thunk": "^0.1.0"
   },
@@ -43,7 +44,6 @@
     "babel-plugin-react-transform": "^1.1.0",
     "css-loader": "^0.23.1",
     "expect": "^1.6.0",
-    "express": "^4.13.3",
     "jsdom": "^5.6.1",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",

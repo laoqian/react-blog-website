@@ -2,14 +2,13 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
-  entry: [
-    './src/index'
-  ],
+  entry: {
+   index: './index'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    filename: '[name].bundle.js',
+    chunkFilename: "[name].chunk.js",
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -25,10 +24,20 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: [ 'babel' ],
+        exclude: /node_modules/,
+        include: __dirname
+      },{
+        test: /\.less$/,
+        loader: 'style!css!less'
+      }, {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+    ]
   }
 };
