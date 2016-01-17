@@ -4,6 +4,7 @@
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
     "start": "set NODE_ENV = development && node devServer.js",
+    "build": "webpack --config ./webpack.config.prod.js",
     "test": "set DEBUG=* && node test/test.js"
   },
   "repository": {
@@ -26,15 +27,17 @@
   "author": "qixian yu <858385135@qq.com> (http://github.com/gaearon)",
   "license": "CC0-1.0",
   "dependencies": {
+    "autoprefixer": "^6.3.1",
+    "express": "^4.13.3",
     "history": "^1.17.0",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.2.0",
+    "postcss-loader": "^0.8.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.3",
-    "express": "^4.13.3",
     "redux": "^3.0.0",
     "redux-thunk": "^0.1.0"
   },

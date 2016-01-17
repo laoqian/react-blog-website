@@ -5,6 +5,7 @@ var fs = require('fs');
 
 
 var webpack = require('webpack');
+var autoprefixer  = require('autoprefixer');
 
 var dir = './src';
 var files = fs.readdirSync(dir);
@@ -31,14 +32,16 @@ var config ={
         include: __dirname
       },{
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: 'style!css!postcss!less'
       }, {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css!postcss'
       },
       {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
     ]
-  }
+  },
+
+  postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
 };
 
 
