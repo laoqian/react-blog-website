@@ -6,28 +6,56 @@ export default class SearchBar extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.id !== this.props.id) {
-      this.setInputValue(nextProps.id);
-    }
+
   }
   getInputValue() {
     return this.refs.input.value;
   }
-  setInputValue(val) {
-    this.refs.input.value = val;
+
+
+  renderInput(input){
+    return(
+      <span>
+        {input.name}:
+        <input type="text" placeholder={input.placeholder} defaultValue={input.value}/>
+      </span>
+    )
+  }
+
+  renderSelect(sel){
+    console.log(sel);
+    return(
+      <span>
+        {sel.name}:
+        <select name={sel.name} id="">
+          {
+            sel.op.map((option,key)=>(
+              <option value={key}>{option.name}</option>
+            ))
+          }
+        </select>
+      </span>
+    )
+  }
+
+  renderComponet(coms){
+    return (coms.map(com=>{
+      if(com.type=='input'){
+        return this.renderInput(com)
+      }else if(com.type=='select'){
+        return this.renderSelect(com)
+      }
+    }))
   }
 
   handleOnClick(){
     this.props.search(this.getInputValue());
   }
   render() {
+    console.log(this.props.notice);
     return (
       <div>
-        <span>输入需要查询的用户ID:</span>
-        <input type="text"
-               placeholder="用户ID"
-               ref="input"
-               defaultValue={this.props.id}/>
+        {this.renderComponet(this.props.coms)}
         <button onClick={this.handleOnClick}>
           确定
         </button>
@@ -36,8 +64,4 @@ export default class SearchBar extends Component {
   }
 }
 
-SearchBar.propTypes = {
-  id: PropTypes.number.isRequired,
-  search: PropTypes.func.isRequired
-};
 

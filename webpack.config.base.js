@@ -19,7 +19,7 @@ files.forEach(file=>{
 var config ={
   entry,
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'static'),
     filename: '[name].bundle.js',
     chunkFilename: "[name].chunk.js",
   },

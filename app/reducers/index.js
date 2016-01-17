@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import mainMenu from './mainMenu';
-import table from './table';
+import SearchBar from './search-bar';
 
 
 const rootReducer = combineReducers({
   mainMenu,
-  user:table
+  explore:SearchBar
 });
 
 export default rootReducer;

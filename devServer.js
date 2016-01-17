@@ -3,8 +3,7 @@ var express = require('express');
 
 var app = express();
 
-
-if(app.get('env') != 'production'){
+if(app.get('env') === 'development'){
   var config = require('./webpack.config.dev');
   var webpack = require('webpack');
   var compiler = webpack(config);
@@ -29,12 +28,12 @@ if(app.get('env') != 'production'){
   console.log('developement');
 }else{
 
-  app.use('/static', express.static('dist'));
+  //app.use('/static', express.static('dist'));
   console.log('production');
 }
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'html','index.html'));
 });
 
 
