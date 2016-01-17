@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Menus from './../components/Menus'
+import Menus from '../components/Menus'
 import {menuAction} from '../actions/menuAction'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';

@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 
-if(app.get('env') !== 'production'){
+if(app.get('env') != 'production'){
   var config = require('./webpack.config.dev');
   var webpack = require('webpack');
   var compiler = webpack(config);
@@ -30,7 +30,6 @@ if(app.get('env') !== 'production'){
 }else{
 
   app.use('/static', express.static('dist'));
-
   console.log('production');
 }
 
