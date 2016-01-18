@@ -13,7 +13,8 @@ var entry ={};
 
 
 files.forEach(file=>{
-  entry[file.replace(/.js$/,'')] = path.join(__dirname,dir,file);
+  entry[file.replace(/.js$/,'')] = [];
+  entry[file.replace(/.js$/,'')].push(path.join(__dirname,dir,file));
 })
 
 var config ={

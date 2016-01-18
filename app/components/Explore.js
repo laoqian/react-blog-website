@@ -23,7 +23,6 @@ export default class SearchBar extends Component {
   }
 
   renderSelect(sel){
-    console.log(sel);
     return(
       <span>
         {sel.name}:
@@ -52,7 +51,6 @@ export default class SearchBar extends Component {
     this.props.search(this.getInputValue());
   }
   render() {
-    console.log(this.props.notice);
     return (
       <div>
         {this.renderComponet(this.props.coms)}

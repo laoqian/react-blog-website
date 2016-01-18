@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 class MainRight extends Component {
 
   render() {
-    console.log(this.props);
     return (
       <div className="main-right">
         <Explore coms={this.props.explore} notice={this.props.notice}/>
