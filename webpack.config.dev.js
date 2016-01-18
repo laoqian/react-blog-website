@@ -20,7 +20,8 @@ config.plugins =  [
       'NODE_ENV': JSON.stringify('developement'),
       'BABEL_ENV': JSON.stringify('developement')
     }
-  })
+  }),
+  new webpack.optimize.CommonsChunkPlugin({name:'commons',filename:'commons.js'})
 ];
 
 config.output.publicPath= '/static/';

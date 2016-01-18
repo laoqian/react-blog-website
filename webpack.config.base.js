@@ -7,14 +7,33 @@ var fs = require('fs');
 var webpack = require('webpack');
 var autoprefixer  = require('autoprefixer');
 
-var dir = './src';
-var files = fs.readdirSync(dir);
+
+
+
 var entry ={};
 
 
-files.forEach(file=>{
-  entry[file.replace(/.js$/,'')] = [];
-  entry[file.replace(/.js$/,'')].push(path.join(__dirname,dir,file));
+
+var srcPath = path.join(__dirname,'src');
+var dirs = fs.readdirSync(srcPath);
+
+dirs.forEach(dir=>{
+  var stat = fs.lstatSync(path.join(srcPath,dir))
+  if(!stat.isDirectory()) {
+    return;
+  }
+
+  var files=fs.readdirSync(path.join(srcPath,dir))
+  files.forEach(file=>{
+    var reg = /.entry.js$/
+    if(!file.match(reg)){
+      return;
+    }
+
+    var key  = file.replace(reg,'');
+    entry[key]= [];
+    entry[key].push(path.join(srcPath,dir,file));
+  })
 })
 
 var config ={
@@ -22,7 +41,7 @@ var config ={
   output: {
     path: path.join(__dirname, 'static'),
     filename: '[name].bundle.js',
-    chunkFilename: "[name].chunk.js",
+    chunkFilename: "[name].chunk.js"
   },
   module: {
     loaders: [

@@ -3,7 +3,7 @@ var express = require('express');
 
 var app = express();
 
-if(app.get('env') === 'development'){
+if(app.get('env') !== 'production'){
   var config = require('./webpack.config.dev');
   var webpack = require('webpack');
   var compiler = webpack(config);
@@ -29,7 +29,7 @@ if(app.get('env') === 'development'){
   console.log('developement');
 }else{
 
-  //app.use('/static', express.static('dist'));
+  app.use('/static', express.static('static'));
   console.log('production');
 }
 

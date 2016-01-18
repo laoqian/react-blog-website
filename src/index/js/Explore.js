@@ -5,8 +5,8 @@ export default class SearchBar extends Component {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
 
+  componentWillReceiveProps(nextProps) {
   }
   getInputValue() {
     return this.refs.input.value;

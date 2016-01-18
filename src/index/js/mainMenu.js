@@ -1,5 +1,5 @@
-import { MENU_CLICK } from '../actions/menuAction'
-import  {Menu} from '../lib/menu'
+import { MENU_CLICK } from './menuAction'
+import  {Menu} from '../../../lib/api/menu'
 import  immutable from 'immutable'
 
 var menuArr =[

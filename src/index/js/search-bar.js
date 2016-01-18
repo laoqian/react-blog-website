@@ -1,4 +1,4 @@
-import  {Explore} from '../lib/explore'
+import  {Explore} from '../../../lib/api/explore'
 
 
 

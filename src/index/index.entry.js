@@ -1,10 +1,10 @@
-import './../app/less/styles.less'
+import './less/styles.less'
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from '../app/containers/App';
-import configureStore from '../app/store/configureStore';
-import DevTools from '../app/containers/DevTools'
+import App from './js/App';
+import configureStore from './js/configureStore';
+import DevTools from '../../public/DevTools'
 
 const store = configureStore();
 

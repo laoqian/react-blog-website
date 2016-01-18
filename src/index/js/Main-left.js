@@ -1,25 +1,32 @@
 import React, { Component, PropTypes } from 'react'
-import Explore from '../components/Explore'
-import {menuAction} from '../actions/menuAction'
+import Menus from './Menus'
+import {menuAction} from './menuAction'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
-class MainRight extends Component {
+class MainLeft extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
-      <div className="main-right">
-        <Explore coms={this.props.explore} notice={this.props.notice}/>
+      <div className="main-left">
+        <Menus menu={this.props.menu} onChange={this.props.onChange}/>
       </div>
     )
   }
 }
 
+MainLeft.propTypes = {
+  menu: PropTypes.array.isRequired,
+  onChange:PropTypes.func.isRequired
+};
+
 
 function mapStateToProps(state){
   return{
-    explore:state.explore,
-    notice:'我的提醒'
+    menu:state.mainMenu
   }
 }
 
@@ -32,6 +39,4 @@ function mapActionToProps(dispatch){
 export default connect(
   mapStateToProps,
   mapActionToProps
-)(MainRight);
-
-
+)(MainLeft);
