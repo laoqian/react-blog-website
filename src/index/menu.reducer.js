@@ -1,5 +1,5 @@
-import { MENU_CLICK } from './menuAction'
-import  {Menu} from '../../../lib/api/menu'
+import { MENU_CLICK } from './action.js'
+import  {Menu} from '../../lib/menu'
 import  immutable from 'immutable'
 
 var menuArr =[
@@ -34,7 +34,6 @@ var menuArr =[
 var menu = new Menu();
 
 menu.addByArr(menuArr);
-
 
 
 export default function mainMenu(state = menu.get(), action) {

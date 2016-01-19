@@ -1,12 +1,27 @@
-import './less/styles.less'
-import React from 'react';
+import './styles.less'
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './js/App';
-import configureStore from './js/configureStore';
-import DevTools from '../../public/DevTools'
+import configureStore from './configureStore';
+import DevTools from '../../lib/DevTools'
+import React, { Component, PropTypes } from 'react'
+import Header from './Header.container.js';
+import MainLeft from './Main-left.container.js';
+import MainRight from './Main-right.container.js';
+
 
 const store = configureStore();
+
+class App  extends Component{
+  render() {
+    return (
+      <div className="wrapper">
+        <Header/>
+        <MainLeft/>
+        <MainRight/>
+      </div>
+    )
+  }
+}
 
 
 if(process.env.NODE_ENV !=='production'){

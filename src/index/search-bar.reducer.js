@@ -1,4 +1,5 @@
-import  {Explore} from '../../../lib/api/explore'
+import  {Explore} from '../../lib/explore'
+import { EXPLORE_CHANGE } from './action.js'
 
 
 
@@ -16,7 +17,7 @@ bar.addSelect({
   ]
 });
 bar.addSelect({
-  name:'用户名',
+  name:'国籍',
   op:[
     {name:'中国'},
     {name:'美国'},
@@ -25,7 +26,7 @@ bar.addSelect({
   ]
 });
 bar.addSelect({
-  name:'用户名',
+  name:'曾近',
   op:[
     {name:'中国'},
     {name:'美国'},
@@ -34,6 +35,12 @@ bar.addSelect({
   ]
 });
 
-export default function SearchBar(state=bar.get(), action) {
-      return state
+
+export default function SearchBar(state=bar.get(), action){
+     switch (action.type){
+       case EXPLORE_CHANGE:
+         return action.explore
+       default:
+           return state
+     }
 }

@@ -8,7 +8,6 @@ if(app.get('env') !== 'production'){
   var webpack = require('webpack');
   var compiler = webpack(config);
 
-
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,

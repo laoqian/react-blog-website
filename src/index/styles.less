@@ -10,13 +10,13 @@ body{
 }
 
 .header-bar{
-  width:  100%;
+  width:  99%;
   height: 60px;
   background: #f0f0aa;
   border-bottom: solid 1px #f0f0f0;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  padding-left: 1%;
   border-bottom: solid 2px darken(#f0f0aa,50%);
 }
 
@@ -48,9 +48,31 @@ body{
 
 .main-right{
   width: 90%;
-  background: #f0f0f0;
   position: fixed;
   top:62px;
   right: 0;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+
+
+  .explore{
+    width: 99%;
+    height: 40px;
+    background: #3399FF;
+    display: flex;
+    align-items: center;
+    padding-left: 1%;
+
+    *{
+      font-size: 13px;
+    }
+    span{
+      margin-left: 5px;
+    }
+
+    button{
+      margin-left: 10px;
+    }
+  }
 }

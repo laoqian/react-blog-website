@@ -3,7 +3,7 @@
 var webpack = require('webpack')
 var baseConfig = require('./webpack.config.base')
 
-var config = Object.create(baseConfig)
+var config = baseConfig
 
 
 config.plugins = [
@@ -20,9 +20,17 @@ config.plugins = [
       screw_ie8: true,
       warnings: false
     }
-  }),
-  new webpack.optimize.CommonsChunkPlugin({name:'commons',filename:'commons.js'})
+  })//, new webpack.optimize.CommonsChunkPlugin({name:'commons',filename:'commons.js'})
 ];
+
+
+//config.resolve={}
+//config.resolve.alias={
+//  react:"node_modules/react/dist/react.min.js"
+//}
+//config.externals={
+//  'react':'window.React'
+//}
 
 
 module.exports = config
