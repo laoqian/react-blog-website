@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
-    "start": " node devServer.js",
-    "build": "webpack --config ./webpack.config.prod.js",
+    "start": "set NODE_ENV=developement && node devServer.js",
+    "publish": "set NODE_ENV=production && node devServer.js",
+    "build": "set NODE_ENV=production && set BABEL_ENV=production&& webpack --config ./webpack.config.prod.js",
     "test": "set DEBUG=* && node test/test.js"
   },
   "repository": {
