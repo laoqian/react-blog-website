@@ -7,6 +7,10 @@ body{
   font-size: 13px;
 }
 
+ul{
+  list-style: none;
+  padding: 0;
+}
 .wrapper{
   width: 100%;
 }
@@ -79,5 +83,27 @@ body{
     width: 99%;
     align-self: center;
     background: saddlebrown;
+    margin-bottom: 4px;
+  }
+
+  .pages{
+    width: 99%;
+    align-self: center;
+    height: 30px;
+    //border-top:dashed 1px red;
+    display: flex;
+    align-items: center;
+
+    button,li{
+      margin-right: 3px;
+    }
+
+    .hidden{
+      display: none;
+    }
+
+    .pg-sel{
+      background: red;
+    }
   }
 }

@@ -7,14 +7,14 @@ class Menus extends Component {
   }
 
   onMenuClick(){
-    this.change(this.id);
+    this.change(this.menu);
   }
 
   renderMenu(menus){
     return  menus.map(menu=>{
       return(
         <div key={menu.id}>
-          <li onClick={this.onMenuClick.bind({change:this.props.onChange,id:menu.id})}
+          <li onClick={this.onMenuClick.bind({change:this.props.onChange,menu})}
               style={menu.style}>
               {menu.prefix}{menu.name}
           </li>
