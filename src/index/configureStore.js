@@ -2,13 +2,12 @@ import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
 import DevTools from '../../componet/DevTools';
 import { combineReducers } from 'redux';
-import mainMenu from './menu.reducer.js';
-import {SearchBar,user_reducer} from './search-bar.reducer.js';
+import {filiter_reducer,user_reducer,menu_reducer} from './reducer.js';
 
 
 const rootReducer = combineReducers({
-  mainMenu,
-  explore:SearchBar,
+  mainMenu:menu_reducer,
+  explore:filiter_reducer,
   user_tab:user_reducer
 });
 

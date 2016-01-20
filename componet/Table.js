@@ -19,7 +19,6 @@ class Table extends Component {
             <td>
               {col}
             </td>))}
-
           </tr>
           ))}
         </tbody>
@@ -27,7 +26,6 @@ class Table extends Component {
     )
   }
 }
-
 
 
 export default Table;

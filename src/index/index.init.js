@@ -1,7 +1,10 @@
-import { MENU_CLICK } from './action.js'
+/**
+ * Created by gg on 2016/1/20.
+ */
 import  {Menu} from '../../lib/menu.js'
-import  immutable from 'immutable'
+import  {Explore} from '../../lib/explore.js'
 
+var init={}
 var menuArr =[
   {pid:0,name:"菜单1"},
   {pid:0,name:"菜单2"},
@@ -30,15 +33,33 @@ var menuArr =[
   {pid:9,name:"菜单15"},
   {pid:10,name:"菜单15"}
 ];
+init.menu  = new Menu()
+init.menu.addByArr(menuArr)
 
-var menu = new Menu()
-menu.addByArr(menuArr)
-export default function mainMenu(state = menu.get(), action) {
-  switch (action.type) {
-    case MENU_CLICK:
-      menu.subChangeStateById(action.id,true);
-      return menu.get();
-    default:
-      return state
-  }
-}
+
+init.user_tab = [
+  ['名字','住址','联系方式'],
+  ['名字','住址','联系方式'],
+  ['名字','住址','联系方式'],
+  ['名字','住址','联系方式'],
+  ['名字','住址','联系方式']
+]
+
+init.bar  = new Explore();
+init.bar.addInput({name:'用户名',placeholder:'你的名字'});
+init.bar.addSelect({
+  name:'德国',
+  op:['中国', '美国', '俄罗斯','韩国']
+});
+init.bar.addSelect({
+  name:'国籍',
+  op:['中国', '美国', '俄罗斯','韩国']
+});
+init.bar.addSelect({
+  name:'曾近',
+  op:['中国', '美国', '俄罗斯','韩国']
+});
+
+
+
+export default init

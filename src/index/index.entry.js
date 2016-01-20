@@ -4,9 +4,9 @@ import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
 import DevTools from '../../componet/DevTools'
-import Header from './Header.container.js';
-import MainLeft from './Main-left.container.js';
-import MainRight from './Main-right.container.js';
+import Header from './Header.js';
+import MainLeft from './Main-left.js';
+import MainRight from './Main-right.js';
 
 
 const store = configureStore();
