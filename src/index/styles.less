@@ -3,7 +3,9 @@ body{
   padding: 0;
 }
 
-
+*{
+  font-size: 13px;
+}
 
 .wrapper{
   width: 100%;
@@ -53,8 +55,7 @@ body{
   right: 0;
   bottom: 0;
   display: flex;
-  justify-content: center;
-
+  flex-flow: column;
 
   .explore{
     width: 99%;
@@ -62,11 +63,9 @@ body{
     background: #3399FF;
     display: flex;
     align-items: center;
-    padding-left: 1%;
+    align-self: center;
 
-    *{
-      font-size: 13px;
-    }
+
     span{
       margin-left: 5px;
     }
@@ -74,5 +73,11 @@ body{
     button{
       margin-left: 10px;
     }
+  }
+
+  table{
+    width: 99%;
+    align-self: center;
+    background: saddlebrown;
   }
 }

@@ -25,7 +25,7 @@ if(app.get('env') !== 'production'){
     log: console.log
   }));
 
-  console.log('developement');
+  console.log('development');
 }else{
 
   app.use('/static', express.static('static'));

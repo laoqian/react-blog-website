@@ -17,8 +17,8 @@ config.plugins =  [
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
     'process.env': {
-      'NODE_ENV': JSON.stringify('developement'),
-      'BABEL_ENV': JSON.stringify('developement')
+      'NODE_ENV': JSON.stringify('development'),
+      'BABEL_ENV': JSON.stringify('development')
     }
   })//,new webpack.optimize.CommonsChunkPlugin({name:'commons',filename:'commons.js'})
 ];

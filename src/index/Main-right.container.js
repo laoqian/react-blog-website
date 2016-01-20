@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import Explore from './Explore.component.js'
+import Explore from './../../componet/Explore.js'
+import Table from './../../componet/Table.js'
 import {exploreAction} from './action.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -10,8 +11,8 @@ class MainRight extends Component {
     return (
       <div className="main-right">
         <Explore coms={this.props.explore}
-                 notice={this.props.notice}
                  onChange={this.props.onChange}/>
+        <Table table={this.props.user_tab}/>
       </div>
     )
   }
@@ -22,13 +23,14 @@ class MainRight extends Component {
 
 function mapStateToProps(state){
   return{
-    explore:state.explore
+    explore:state.explore,
+    user_tab:state.user_tab
   }
 }
 
 function mapActionToProps(dispatch){
   return{
-    onChange:bindActionCreators(exploreAction, dispatch)
+    onChange:bindActionCreators(exploreAction,dispatch)
   }
 }
 

@@ -1,5 +1,5 @@
 import { MENU_CLICK } from './action.js'
-import  {Menu} from '../../lib/menu'
+import  {Menu} from '../../lib/menu.js'
 import  immutable from 'immutable'
 
 var menuArr =[
@@ -31,11 +31,8 @@ var menuArr =[
   {pid:10,name:"菜单15"}
 ];
 
-var menu = new Menu();
-
-menu.addByArr(menuArr);
-
-
+var menu = new Menu()
+menu.addByArr(menuArr)
 export default function mainMenu(state = menu.get(), action) {
   switch (action.type) {
     case MENU_CLICK:

@@ -1,9 +1,9 @@
 import './styles.less'
 import { render } from 'react-dom';
+import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
-import DevTools from '../../lib/DevTools'
-import React, { Component, PropTypes } from 'react'
+import DevTools from '../../componet/DevTools'
 import Header from './Header.container.js';
 import MainLeft from './Main-left.container.js';
 import MainRight from './Main-right.container.js';
