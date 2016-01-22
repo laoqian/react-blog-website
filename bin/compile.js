@@ -1,7 +1,8 @@
 
+var path        = require('path')
 
-const config = require('../config/base.config')
-const debug = require('debug')('app:bin:compile')
+const config    = require('../config/base.config')
+const debug     = require('debug')('app:bin:compile')
 
 
 debug('创建webpack编译器.')
@@ -28,4 +29,6 @@ compiler.run(function (err, stats) {
   } else {
     debug('编译成功!')
   }
+
+  config.copyStyles()
 })

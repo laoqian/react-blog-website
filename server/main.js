@@ -26,10 +26,10 @@ if(app.get('env') !== 'production'){
     log: console.log
   }));
 
-}else{
-  app.use('/dist', express.static(path.join(config.dir_proj,config.dir_dist)));
+  config.copyStyles()
 }
 
+app.use('/dist', express.static(path.join(config.dir_proj,config.dir_dist)));
 app.get('/', function(req, res) {
   res.sendFile(path.join(config.dir_html, 'index.html'));
 });

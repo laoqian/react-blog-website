@@ -11,6 +11,8 @@ var config  = require('./base.config')
 var fs      = require('fs')
 var autoprefixer  = require('autoprefixer')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
 
 var __DEV__    = config['__DEV__']
 var __PROD__   = config['__PROD__']
@@ -56,12 +58,11 @@ var webpackConfig ={
         include: config.dir_src
       },{
         test: /\.less$/,
-        loader: 'style!css!postcss!less'
-      }, {
+        loader: ExtractTextPlugin.extract('style','css!postcss!less')
+      },{
         test: /\.css$/,
-        loader: 'style!css!postcss'
-      },
-      {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+        loader: ExtractTextPlugin.extract('style','css!postcss')
+      }
     ]
   },
 
@@ -98,20 +99,21 @@ if(__DEV__){
 }
 
 
-//// File loaders
-///* eslint-disable */
-//webpackConfig.module.loaders.push(
-//  { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-//  { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-//  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
-//  { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-//  { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-//  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-//  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
-//)
-///* eslint-enable */
+// File loaders
+/* eslint-disable */
+webpackConfig.module.loaders.push(
+  { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+  { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
+  { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+  { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
+  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+)
+/* eslint-enable */
 
-
+//添加loader将css编译成一个文件
+webpackConfig.plugins.push(new ExtractTextPlugin("[name].bundle.css"))
 
 exports = module.exports  = webpackConfig
 
