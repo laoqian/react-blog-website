@@ -3,10 +3,26 @@
   "version": "1.0.0",
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
-    "start": "node devServer.js",
-    "publish": "set NODE_ENV=production && node devServer.js",
-    "build": "set NODE_ENV=production && set BABEL_ENV=production&& webpack --config ./webpack.config.prod.js",
-    "test": "set DEBUG=* && node test/test.js"
+    "clean": "rm -rf dist",
+    "compile": "node -r dotenv/config --harmony bin/compile",
+    "start": "node  -r dotenv/config --harmony server/main",
+    "start:pro": "better-npm-run production",
+    "test": "set DEBUG=* && node test/test.js",
+    "deploy": "better-npm-run deploy"
+  },
+  "betterScripts": {
+    "deploy": {
+      "command": "npm run clean && npm run compile",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "production": {
+      "command": "node -r dotenv/config server/main",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -29,6 +45,9 @@
   "license": "CC0-1.0",
   "dependencies": {
     "autoprefixer": "^6.3.1",
+    "better-npm-run": "0.0.5",
+    "debug": "^2.2.0",
+    "dotenv": "^2.0.0",
     "express": "^4.13.3",
     "history": "^1.17.0",
     "immutable": "^3.7.6",

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
-import DevTools from '../../componet/DevTools'
+import DevTools from '../public/componet/DevTools'
 import Header from './Header.js';
 import MainLeft from './Main-left.js';
 import MainRight from './Main-right.js';

@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
-import DevTools from '../../componet/DevTools';
+import DevTools from '../public/componet/DevTools';
 import { combineReducers } from 'redux';
 import {filiter_reducer,user_reducer,menu_reducer,page_reducer} from './reducer.js';
 

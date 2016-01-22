@@ -1,22 +1,23 @@
 var path = require('path');
 var express = require('express');
+var config = require('../config/base.config');
 
 var app = express();
 
 if(app.get('env') !== 'production'){
-  var config = require('./webpack.config.dev');
+  var webpackConfig = require('../config/webpack.config.js');
   var webpack = require('webpack');
-  var compiler = webpack(config);
+  var compiler = webpack(webpackConfig);
 
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
-    publicPath: config.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
     //lazy:true
     stats: {
       colors: true
     },
     watchOptions:{
-      aggregateTimeout: 200,
+      aggregateTimeout: 1000,
       poll:true
     }
   }));
@@ -25,23 +26,20 @@ if(app.get('env') !== 'production'){
     log: console.log
   }));
 
-  console.log('development');
 }else{
-
-  app.use('/static', express.static('static'));
-  console.log('production');
+  app.use('/dist', express.static(path.join(config.dir_proj,config.dir_dist)));
 }
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'html','index.html'));
+  res.sendFile(path.join(config.dir_html, 'index.html'));
 });
 
 
-app.listen(5000, 'localhost', function(err) {
+app.listen(config.server_port, config.server_host, function(err) {
   if (err) {
     console.log(err);
     return;
   }
 
-  console.log('Listening at http://localhost:5000');
+  console.log(`Listening at http://${config.server_host}:${config.server_port}`);
 });

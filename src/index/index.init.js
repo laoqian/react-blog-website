@@ -1,10 +1,9 @@
 /**
  * Created by gg on 2016/1/20.
  */
-import  {Menu} from '../../lib/menu.js'
-import  {Explore} from '../../lib/explore.js'
+import  {Menu} from '../public/lib/menu.js'
+import  {Explore} from '../public/lib/explore.js'
 import fetch from  'isomorphic-fetch'
-import $ from 'jquery'
 
 var init={}
 var menuArr =[

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Explore from './../../componet/Explore'
-import Table from './../../componet/Table'
-import Pages from './../../componet/Pages'
+import Explore from '../public/componet/Explore'
+import Table from '../public/componet/Table'
+import Pages from '../public/componet/Pages'
 import {exploreAction,pageAction} from './action'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
