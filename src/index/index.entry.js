@@ -24,7 +24,7 @@ class App  extends Component{
 }
 
 
-if(process.env.NODE_ENV !=='production'){
+if(__DEV__){
   render(
     <Provider store={store}>
       <div>

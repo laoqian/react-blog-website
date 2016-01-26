@@ -16,7 +16,6 @@ class Menus extends Component {
         <div key={menu.id}>
           <li onClick={this.onMenuClick.bind({change:this.props.onChange,menu})}
               style={menu.style}>
-              <i className="icon-camera-retro"></i>
               {menu.prefix}{menu.name}
           </li>
           {this.renderMenu(menu.sub)}

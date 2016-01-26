@@ -47,7 +47,7 @@ var webpackConfig ={
   output: {
     path: path.join(config.dir_proj,config.dir_dist),
     filename: '[name].bundle.js',
-    chunkFilename: "[name].chunk.js"
+    chunkFilename: "index.chunk.js"
   },
   module: {
     loaders: [
@@ -56,18 +56,38 @@ var webpackConfig ={
         loaders: [ 'babel' ],
         exclude: /node_modules/,
         include: config.dir_src
-      },{
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style','css!postcss!less')
-      },{
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style','css!postcss')
       }
     ]
   },
 
   postcss: [autoprefixer({ browsers: ['last 2 versions'] }) ]
 };
+
+
+if(__DEV__){
+
+  webpackConfig.module.loaders.push({
+    test: /\.less$/,
+    loader: 'style!css!postcss!less'
+  })
+
+  webpackConfig.module.loaders.push({
+    test: /\.css/,
+    loader: 'style!css!postcss'
+  })
+}else if(__PROD__){
+
+  webpackConfig.module.loaders.push({
+    test: /\.less$/,
+    loader: ExtractTextPlugin.extract('style','css!postcss!less')
+  })
+
+  webpackConfig.module.loaders.push({
+    test: /\.css/,
+    loader: ExtractTextPlugin.extract('style','css!postcss')
+  })
+}
+
 
 webpackConfig.plugins =  [
   new webpack.optimize.OccurenceOrderPlugin()
@@ -80,7 +100,7 @@ if(__DEV__){
     webpackConfig.entry[app].push('webpack-hot-middleware/client')
   }
 
-  webpackConfig.devtool = 'cheap-module-eval-source-map';
+  webpackConfig.devtool = 'source-map';
   webpackConfig.output.publicPath= config.dir_dist
 
   webpackConfig.plugins.push(new webpack.NoErrorsPlugin())
@@ -112,10 +132,55 @@ webpackConfig.module.loaders.push(
 )
 /* eslint-enable */
 
-//添加loader将css编译成一个文件
-webpackConfig.plugins.push(new ExtractTextPlugin("[name].bundle.css"))
+
+if(__PROD__){
+  //添加loader将css编译成一个文件
+  webpackConfig.plugins.push(new ExtractTextPlugin("[name].bundle.css"))
+}
+
+webpackConfig.plugins.push(new webpack.DefinePlugin({
+  '__DEV__': config['__DEV__'],
+  '__PROD__': config['__PROD__']
+}))
+
+//var path = require('path');
+//var node_modules = path.resolve(__dirname, '../node_modules')
+//var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js')
+//
+//
+//webpackConfig.module.noParse =[pathToReact]
+//
+//webpackConfig.profile = true
+//
+//webpackConfig.target = 'web'
+//
+//webpackConfig.color = true
+//
+//webpackConfig.externals = {
+//  react:true,
+//  lodash:true,
+//  redux:true
+//}
 
 exports = module.exports  = webpackConfig
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,4 @@
 
-var path        = require('path')
-
 const config    = require('../config/base.config')
 const debug     = require('debug')('app:bin:compile')
 
