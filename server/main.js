@@ -73,6 +73,8 @@ if(app.get('env') !== 'production'){
   config.copyStyles()
 }
 
+console.log(path.join(config.dir_proj,config.dir_dist))
+
 app.use('/dist', express.static(path.join(config.dir_proj,config.dir_dist)));
 router_init(app)
 

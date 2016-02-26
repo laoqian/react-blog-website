@@ -19,6 +19,7 @@ var config  ={
   dir_proj    :  path.resolve(__dirname,'../'),
   dir_src     :  path.resolve(__dirname,'../src'),
   dir_html    :  path.resolve(__dirname,'../src/static/html'),
+  dir_html_dist    :  path.resolve(__dirname,'../dist/static/html'),
   dir_server  :  path.resolve(__dirname,'../server'),
   dir_dist    :  '/dist/',
   dir_styles  :  path.resolve(__dirname,'../src/static'),
@@ -39,7 +40,7 @@ var config  ={
 config['__DEV__'] = config.env==='development'
 config['__PROD__'] = config.env==='production'
 
-var dst = path.join(config.dir_proj,config.dir_dist,'styles')
+var dst = path.join(config.dir_proj,config.dir_dist,'static')
 
 
 config.copyStyles = function(){
