@@ -40,7 +40,6 @@ function reactViewsGet(dir){
       res.sendFile(html)
     }
   }
-
   for(var key in views){
     views[key] = renderReactHtml(views[key])
   }
@@ -53,10 +52,5 @@ exports = module.exports = function router_init(app){
   var config  = app.get('config')
   var views = reactViewsGet(config.dir_html)
 
-  app.get('/',views.index)
-  app.get('/login',views.login)
-  app.post('/login',(req,res)=>{
-    console.log(req.body)
-    console.log(req.session)
-  })
+  app.get('/',views.example)
 }

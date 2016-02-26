@@ -18,10 +18,10 @@ var config  ={
 
   dir_proj    :  path.resolve(__dirname,'../'),
   dir_src     :  path.resolve(__dirname,'../src'),
-  dir_html    :  path.resolve(__dirname,'../src/public/html'),
+  dir_html    :  path.resolve(__dirname,'../src/static/html'),
   dir_server  :  path.resolve(__dirname,'../server'),
   dir_dist    :  '/dist/',
-  dir_styles  :  path.resolve(__dirname,'../src/styles'),
+  dir_styles  :  path.resolve(__dirname,'../src/static'),
 
   //---------------------------------
   //服务器配置

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import {Link} from 'react-router'
 
 
 class Menus extends Component {
@@ -11,13 +12,26 @@ class Menus extends Component {
   }
 
   renderMenu(menus){
+    let List
+
     return  menus.map(menu=>{
-      return(
-        <div key={menu.id}>
+
+      if(!menu.link || menu.sub.length>0){
+        List =
           <li onClick={this.onMenuClick.bind({change:this.props.onChange,menu})}
               style={menu.style}>
-              {menu.prefix}{menu.name}
+            {menu.prefix}{menu.name}
           </li>
+      }else{
+        List =
+          <li style={menu.style}>
+            <Link className="link" to={menu.link}>{menu.prefix}{menu.name} </Link>
+          </li>
+      }
+
+      return(
+        <div key={menu.id}>
+          {List}
           {this.renderMenu(menu.sub)}
         </div>
       )
