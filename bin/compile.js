@@ -28,5 +28,5 @@ compiler.run(function (err, stats) {
     debug('编译成功!')
   }
 
-  config.copyStyles()
+  config.copyStatic()
 })

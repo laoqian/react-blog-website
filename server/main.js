@@ -70,10 +70,10 @@ if(app.get('env') !== 'production'){
     log: console.log
   }));
 
-  config.copyStyles()
+  config.copyStatic()
 }
 
-app.use('/dist', express.static(path.join(config.dir_proj,config.dir_dist)));
+app.use('/', express.static(path.join(config.dir_proj,config.dir_dist)));
 router_init(app)
 
 

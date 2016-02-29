@@ -8,6 +8,14 @@ var path  = require('path')
 var fs    =  require('fs-extra')
 
 
+//---------项目工程目录---------------------
+
+var dir ={
+  main       : 'example',    //web前端工程主目录,可以任意更改，改目录应放在muyu-cms根目录下
+  static     : 'static', //静态文件目录，必须放在main的根目录下
+  html       : 'html'    //html文件目录，必须放在static根目录下
+}
+
 var config  ={
   env:process.env.NODE_ENV|| 'development',
 
@@ -15,13 +23,9 @@ var config  ={
   //-------------------
   //项目结构
   //-------------------
-
-  dir_proj    :  path.resolve(__dirname,'../'),
-  dir_src     :  path.resolve(__dirname,'../src'),
-  dir_html    :  path.resolve(__dirname,'../src/static/html'),
   dir_server  :  path.resolve(__dirname,'../server'),
-  dir_dist    :  '/dist/',
-  dir_styles  :  path.resolve(__dirname,'../src/static'),
+  dir_dist    :  'dist/',
+  dir_public  :  '/',
 
   //---------------------------------
   //服务器配置
@@ -31,6 +35,12 @@ var config  ={
 }
 
 
+config.dir_proj =  path.resolve(__dirname,'../')
+config.dir_src  = path.resolve(config.dir_proj,dir.main)
+config.dir_static  = path.resolve(config.dir_src,dir.static)
+config.dir_html  = path.resolve(config.dir_static,dir.html)
+config.dir_html_dist = path.resolve(__dirname,'../',config.dir_dist,dir.static,dir.html)
+
 
 //-------------------------------
 //环境配置
@@ -39,22 +49,22 @@ var config  ={
 config['__DEV__'] = config.env==='development'
 config['__PROD__'] = config.env==='production'
 
-var dst = path.join(config.dir_proj,config.dir_dist,'styles')
+var dst = path.join(config.dir_proj,config.dir_dist)
 
 
-config.copyStyles = function(){
+config.copyStatic = function(){
   fs.ensureDir(dst, function (err) {
     if(err){
-      console.log('创建styles目录失败');
+      console.log('创建静态文件目录失败');
       return;
     }
 
     try {
-      fs.copySync( config.dir_styles,dst)
+      fs.copySync( config.dir_static,dst)
     } catch (err) {
       console.error('Oh no, there was an error: ' + err.message)
     }
-    debug('复制样式文件功')
+    debug('复制静态文件成功')
   })
 }
 

@@ -101,7 +101,7 @@ if(__DEV__){
   }
 
   webpackConfig.devtool = 'source-map';
-  webpackConfig.output.publicPath= config.dir_dist
+  webpackConfig.output.publicPath= config.dir_public
 
   webpackConfig.plugins.push(new webpack.NoErrorsPlugin())
 
