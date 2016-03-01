@@ -4,7 +4,7 @@
 
 var model = require('./lib/model');
 
-function vip_model(pool){
+function user_model(pool){
   model.call(this,pool);
 
   this.table = 'eb_category';

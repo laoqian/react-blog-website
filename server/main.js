@@ -10,6 +10,8 @@ var bodyParser = require('body-parser')
 var cookieParser  = require('cookie-parser')
 var session  = require('express-session')
 var parseurl = require('parseurl')
+var RedisStore = require('connect-redis')(session)
+var debug = require('debug')('server')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -21,31 +23,27 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use(session({
-  secret: 'keyboard cat',
+  name:'session_id',
+  secret: '88199',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  store: new RedisStore({
+    host:'127.0.0.1',
+    port:'6379'
+  })
+  ,cookie:{
+    maxAge:3600*1000
+  }
 }))
 
-app.use(function (req, res, next) {
-  var views = req.session.views
+var set_ses = require('./middlewares/setCookie')
 
-  if (!views) {
-    views = req.session.views = {}
-  }
+app.use(set_ses)
 
-  // get the url pathname
-  var pathname = parseurl(req).pathname
-
-  // count the views
-  views[pathname] = (views[pathname] || 0) + 1
-
-  next()
-})
 
 ///创建连接池
 var createMysqlPool = require('./model/addons/mysql_pool');
-app.set('pool',createMysqlPool())
+app.set('pool',createMysqlPool(config.sql_option))
 app.set('config',config)
 
 if(app.get('env') !== 'production'){

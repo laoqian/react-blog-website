@@ -10,6 +10,15 @@ var fs    =  require('fs-extra')
 
 //---------项目工程目录---------------------
 
+//数据库配置
+var option ={
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  port     : '3306',
+  database : 'eb'
+};
+
 var dir ={
   main       : 'example',    //web前端工程主目录,可以任意更改，改目录应放在muyu-cms根目录下
   static     : 'static', //静态文件目录，必须放在main的根目录下
@@ -34,6 +43,8 @@ var config  ={
   server_port   :process.env.PORT || 5000
 }
 
+
+config.sql_option = option
 
 config.dir_proj =  path.resolve(__dirname,'../')
 config.dir_src  = path.resolve(config.dir_proj,dir.main)
