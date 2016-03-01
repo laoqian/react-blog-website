@@ -9,6 +9,7 @@ var init={}
 var menuArr =[
   {pid:0,name:"全部项目"},
   {pid:0,name:"编辑项目"},
+  {pid:0,name:"编辑项目"},
   {pid:0,name:"编辑项目",link:'proj_editor'},
   {pid:1,name:"123",link:'proj_editor'},
   {pid:1,name:"asdf",link:'proj_editor'},

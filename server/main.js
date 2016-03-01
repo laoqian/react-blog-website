@@ -54,16 +54,17 @@ if(app.get('env') !== 'production'){
   var compiler = webpack(webpackConfig);
 
   app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
+
     publicPath: webpackConfig.output.publicPath,
-    //lazy:true
+    //lazy:true,
     stats: {
-      colors: true
+      chunks : false,
+      chunkModules : false,
+      colors : true
     },
-    watchOptions:{
-      aggregateTimeout: 1000,
-      poll:true
-    }
+    hot:true,
+    noInfo: false,
+    quiet:false
   }));
 
   app.use(require("webpack-hot-middleware")(compiler, {
