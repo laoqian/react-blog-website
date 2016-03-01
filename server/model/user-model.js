@@ -24,9 +24,9 @@ function user_model(pool){
 
 }
 
-vip_model.prototype = Object.create(model.prototype);
+user_model.prototype = Object.create(model.prototype)
 
-exports  = module.exports = vip_model;
+exports  = module.exports = user_model
 
 
 
