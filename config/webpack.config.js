@@ -100,7 +100,7 @@ if(__DEV__){
     webpackConfig.entry[app].push('webpack-hot-middleware/client')
   }
 
-  webpackConfig.devtool = 'source-map';
+  //webpackConfig.devtool = 'source-map';
   webpackConfig.output.publicPath= config.dir_public
 
   webpackConfig.plugins.push(new webpack.NoErrorsPlugin())
@@ -116,6 +116,9 @@ if(__DEV__){
       warnings: false
     }
   }))
+
+  //生产环境不编译devtools.js
+  webpackConfig.plugins.push(new webpack.IgnorePlugin(/\.\/DevTools.js$/))
 }
 
 
@@ -143,23 +146,35 @@ webpackConfig.plugins.push(new webpack.DefinePlugin({
   '__PROD__': config['__PROD__']
 }))
 
-//var path = require('path');
-//var node_modules = path.resolve(__dirname, '../node_modules')
-//var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js')
-//
-//
+var path = require('path');
+var node_modules = path.resolve(__dirname, '../node_modules')
+var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js')
+var pathToReactDom = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js')
+
+
 //webpackConfig.module.noParse =[pathToReact]
-//
 //webpackConfig.profile = true
-//
 //webpackConfig.target = 'web'
-//
 //webpackConfig.color = true
-//
-//webpackConfig.externals = {
-//  react:true,
-//  lodash:true,
-//  redux:true
+
+webpackConfig.externals = {
+  react               :  'React',
+  'react-dom'         :  'var window.ReactDom',
+  'react-router'      :  'var window.ReactRouter',
+  'react-redux'       :  'var window.ReactRedux',
+  redux               :  'Redux',
+  history             :  'History',
+  immutable           :  'Immutable'
+}
+
+
+
+
+//webpackConfig.resolve= {
+//  alias: {
+//    react: pathToReact,
+//    'react-dom':pathToReactDom
+//  }
 //}
 
 exports = module.exports  = webpackConfig

@@ -5,12 +5,18 @@
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "node -r dotenv/config --harmony bin/compile  --display-modules",
-    "start": "node  -r dotenv/config --harmony server/main",
+    "start": "better-npm-run development",
     "start:pro": "better-npm-run production",
     "test": "set DEBUG=* && node test/test.js",
     "deploy": "better-npm-run deploy"
   },
   "betterScripts": {
+    "development": {
+      "command": "npm run clean && node  -r dotenv/config --harmony server/main",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
     "deploy": {
       "command": "npm run clean && npm run compile",
       "env": {
@@ -18,7 +24,7 @@
       }
     },
     "production": {
-      "command": "node -r dotenv/config server/main",
+      "command": "npm run deploy &&node -r dotenv/config server/main",
       "env": {
         "NODE_ENV": "production"
       }
@@ -59,8 +65,8 @@
     "isomorphic-fetch": "^2.2.0",
     "mysql": "^2.10.2",
     "parseurl": "^1.3.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.3",
     "redis": "^2.4.2",

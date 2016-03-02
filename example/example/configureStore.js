@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
-import DevTools from '../public/componet/DevTools';
 import { combineReducers } from 'redux';
 import {filiter_reducer,user_reducer,menu_reducer,page_reducer} from './reducer.js';
 
@@ -12,10 +11,21 @@ const rootReducer = combineReducers({
   pages:page_reducer
 });
 
-const createStoreWithMiddleware = compose(
-  applyMiddleware(thunk),
-  DevTools.instrument()
-)(createStore);
+
+if(__DEV__){
+  var DevTools = require( '../public/componet/DevTools')
+  var createStoreWithMiddleware = compose(
+    applyMiddleware(thunk),
+    DevTools.instrument()
+  )(createStore);
+
+}else{
+  var createStoreWithMiddleware = compose(
+    applyMiddleware(thunk)
+  )(createStore);
+}
+
+
 
 export default function configureStore(initialState) {
   const store = createStoreWithMiddleware(rootReducer, initialState);

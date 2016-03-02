@@ -1,10 +1,9 @@
 import './styles.less'
-import { render } from 'react-dom';
+import ReactDom, { render } from 'react';
 import React, { Component, PropTypes } from 'react'
 import { Router, Route, browserHistory,Link } from 'react-router'
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
-import DevTools from '../public/componet/DevTools'
 import Header from './Header';
 import MainLeft from './main-left';
 import ProjSeach from './proj-search';
@@ -27,6 +26,7 @@ class PROJ_MNG  extends Component{
 
 
 
+
 class App extends  Component{
   render(){
     return (
@@ -42,6 +42,7 @@ class App extends  Component{
 
 
 if(__DEV__){
+  var DevTools = require( '../public/componet/DevTools')
   render(
     <Provider store={store}>
       <div>
@@ -51,7 +52,7 @@ if(__DEV__){
     </Provider>,
     document.getElementById('root')
   );
-}else{
+}else {
   render(
     <Provider store={store}>
       <App />
