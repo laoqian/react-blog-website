@@ -21,23 +21,22 @@ app.use(bodyParser.json())
 
 //使用cookie中间件
 app.use(cookieParser())
-
 app.use(session({
-  name:'session_id',
+  name:'ZUSESSIONID',
   secret: '88199',
   resave: false,
   saveUninitialized: true,
-  store: new RedisStore({
-    host:'127.0.0.1',
-    port:'6379'
-  })
-  ,cookie:{
-    maxAge:3600*1000
+  //store: new RedisStore({
+  //  host:'127.0.0.1',
+  //  port:'6379'
+  //}),
+  cookie:{
+    maxAge:5000 //超时时间
   }
 }))
 
-var set_ses = require('./middlewares/setCookie')
 
+var set_ses = require('./middlewares/setCookie')
 app.use(set_ses)
 
 
