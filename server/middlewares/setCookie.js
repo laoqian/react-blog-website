@@ -4,7 +4,6 @@
 
 
 
-console.log(Date.now())
 
 exports = module.exports = function session(req,res,next){
   var session_id = req.sessionID

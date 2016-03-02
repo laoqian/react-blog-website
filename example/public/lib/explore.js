@@ -74,7 +74,17 @@ Explore.prototype.addSelect = function(sel){
 
   this.componet.push(sel)
 };
+Explore.prototype.set = function(com_name,key,name){
 
+  this.componet.map(com=>{
+    if(com.name != com_name){
+      return;
+    }
+
+    com[key]= name
+  })
+
+}
 
 
 Explore.prototype.get = function(){

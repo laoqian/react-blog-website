@@ -28,7 +28,7 @@ init.user_tab = [
 ]
 
 init.bar  = new Explore();
-init.bar.addInput({name:'用户名',placeholder:'你的名字'});
+init.bar.addInput({name:'用户名',placeholder:'你的名字',value:'我的名字'});
 init.bar.addSelect({
   name:'德国',
   op:['中国', '美国', '俄罗斯','韩国']

@@ -3,11 +3,20 @@ import fetch from 'isomorphic-fetch';
 export const MENU_CLICK = '菜单点击';
 export const MENU_LINK=   '加载页面';
 export const TURN_PAGE=   '切换页面';
+export const USERNAME_CHG = '用户名改变';
 export const EXPLORE_CHANGE = '筛选框改变';
+
 const ADMIN_URL = 'https://localhost/admin/user_search'
 
-export function menuAction(menu) {
 
+export function username_chg_action(username){
+  return {
+    type:USERNAME_CHG,
+    username
+  }
+}
+
+export function menuAction(menu) {
   if(menu.link=='#'){
     return {
       type:MENU_CLICK,
@@ -19,7 +28,6 @@ export function menuAction(menu) {
       link:menu.link
     }
   }
-
 }
 
 

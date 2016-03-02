@@ -1,7 +1,8 @@
 import{
   EXPLORE_CHANGE,
   MENU_CLICK,
-  TURN_PAGE
+  TURN_PAGE,
+  USERNAME_CHG
 } from './action.js'
 
 import init from './example.init.js'
@@ -22,6 +23,9 @@ export function filiter_reducer(state=init.bar.get(), action){
      switch (action.type){
        case EXPLORE_CHANGE:
          return action.explore
+       case USERNAME_CHG:
+         init.bar.set('用户名','value',action.username)
+         return init.bar.get()
        default:
            return state
      }

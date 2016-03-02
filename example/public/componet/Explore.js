@@ -16,7 +16,7 @@ export default class Explore extends Component {
   }
 
   handleOnChange(e){
-    this.value = e.target.value;
+    this.props.usernameChange(this.refs.username.value)
   }
 
   renderInput(input,key){
@@ -25,10 +25,11 @@ export default class Explore extends Component {
         <span>
           {input.name}:
         </span>
-        <input type="text"
+        <input ref ='username'
+               type="text"
                placeholder={input.placeholder}
                value={input.value}
-               onChange={this.handleOnChange.bind(input)}/>
+               onChange={this.handleOnChange.bind(this)}/>
       </div>
     )
   }

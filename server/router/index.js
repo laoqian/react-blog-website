@@ -53,6 +53,7 @@ exports = module.exports = function router_init(app){
   var views = reactViewsGet(config.dir_html)
 
   app.get('/',views.example)
-  app.get('/index',views.index)
-  app.get('/user',views.user)
+  for(var html in views){
+    app.get(`/${html}`,views[html])
+  }
 }
