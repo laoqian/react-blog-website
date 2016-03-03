@@ -46,7 +46,7 @@ var webpackConfig ={
   output: {
     path: path.join(config.dir_proj,config.dir_dist),
     filename: '[name].bundle.js',
-    chunkFilename: "index.chunk.js"
+    chunkFilename: "[name].chunk.js"
   },
   module: {
     loaders: [
@@ -145,16 +145,16 @@ webpackConfig.plugins.push(new webpack.DefinePlugin({
   '__PROD__': config['__PROD__']
 }))
 
-var path = require('path');
-var node_modules = path.resolve(__dirname, '../node_modules')
-var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js')
-var pathToReactDom = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js')
-
-
-//webpackConfig.module.noParse =[pathToReact]
-//webpackConfig.profile = true
-//webpackConfig.target = 'web'
-//webpackConfig.color = true
+//var path = require('path');
+//var node_modules = path.resolve(__dirname, '../node_modules')
+////var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js')
+////var pathToReactDom = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js')
+////
+////
+//////webpackConfig.module.noParse =[pathToReact]
+//////webpackConfig.profile = true
+//////webpackConfig.target = 'web'
+//////webpackConfig.color = true
 
 webpackConfig.externals = {
   react               :  'React',
