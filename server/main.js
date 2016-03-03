@@ -16,19 +16,12 @@ var debug = require('debug')('server')
 var cp = require('child_process')
 var process = require('process')
 
-
 //异常监控
 process.on('uncaughtException', function (err) {
   console.log('导致异常的错误: ' + err);
 });
 
-//显示node内存使用情况
-setInterval(function () {
-  var mem = process.memoryUsage()
-  console.log('---------------------------------------------------')
-  console.log(`堆外内存(RSS)占用::${(mem.rss/(1024*1024)).toFixed(2)}M`)
-  console.log('---------------------------------------------------')
-}, 30000);
+
 
 //开启redis服务器
 //cp.execFile('startup.bat',[1,1],{cwd:config.redis_path},(err,stdout,stderr)=>{
@@ -41,7 +34,7 @@ setInterval(function () {
 
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())

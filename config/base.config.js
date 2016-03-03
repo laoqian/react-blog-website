@@ -108,6 +108,20 @@ config.watchStatic = function(){
       console.dir(`分析静态文件目录完成`)
       wp.watch(files,dirs,Date.now()-10000)
       console.dir(`开始监视静态文件目录`)
+
+
+      //显示node内存使用情况
+      var moment = require('moment')
+
+      moment.locale('zh-cn');
+      var stream  = process.stdout
+      var mem  ={}
+      setInterval(function () {
+        mem = process.memoryUsage()
+        stream.clearLine();
+        stream.cursorTo(0);
+        stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}--堆外内存(RSS)占用:${(mem.rss/(1024*1024)).toFixed(2)}M`);
+      }, 1000);
       wp.on('change',(filePath,mtime)=>{
         var len = config.dir_static.length
         var Oldpath = filePath.substr(len,filePath.length)
