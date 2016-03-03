@@ -55,4 +55,12 @@ exports = module.exports = function router_init(app){
   for(var html in views){
     app.get(`/${html}`,views[html])
   }
+
+  app.use('/userchange',user_change)
+}
+
+
+function user_change(req,res){
+  console.log('user_change')
+  res.send({data:'hello'})
 }

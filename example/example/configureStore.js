@@ -16,27 +16,29 @@ const rootReducer = combineReducers({
 //异步ajax中间件
 const fetchMiddleware = store => next => action => {
   console.log('ajax 请求开始')
-  if(!action.uri){
-    return next(action)
-  }
 
-  console.log('ajax 请求开始')
-
-  fetch(action.uri)
+  fetch(action.uri,{
+    body:'123123',
+    method:'post'
+  })
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
       }
-      console.log('success----------')
-      console.log(response)
+     return response.json()
+    })
+    .then(data=>{
+      console.log(data)
     })
     .catch(err=>{
       console.log('err-----------')
       console.log(err)
     })
+
+  return next(action)
 }
 
-console.log(typeof  fetchMiddleware)
+console.log(typeof fetchMiddleware)
 
 
 if(__DEV__){

@@ -41,7 +41,12 @@ var config  ={
   //服务器配置
   //---------------------------------
   server_host   :'localhost',
-  server_port   :process.env.PORT || 5000
+  server_port   :process.env.PORT || 5000,
+
+  //---------------------------------
+  //redis启动脚本
+  //---------------------------------
+   redis_path:'G:/redis/Redis-x64-2.8.2400/'
 }
 
 
