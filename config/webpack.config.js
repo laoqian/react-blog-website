@@ -31,14 +31,13 @@ dirs.forEach(dir=>{
 
   var files=fs.readdirSync(path.join(srcPath,dir))
   files.forEach(file=>{
-    var reg = /.entry.js$/
+    var reg = /entry.js$/
     if(!file.match(reg)){
       return;
     }
 
-    var key  = file.replace(reg,'');
-    entry[key]= [];
-    entry[key].push(path.join(srcPath,dir,file));
+    entry[dir]= [];
+    entry[dir].push(path.join(srcPath,dir,file));
   })
 })
 

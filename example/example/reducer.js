@@ -5,7 +5,7 @@ import{
   USERNAME_CHG
 } from './action.js'
 
-import init from './example.init.js'
+import init from './init.js'
 import immutable from 'immutable'
 
 
