@@ -3,10 +3,11 @@
  */
 
 
-var debug = require('debug')('app:config:base')
-var path  = require('path')
-var fs    =  require('fs-extra')
-
+var debug       = require('debug')('app:config:base')
+var path        = require('path')
+var fs          =  require('fs-extra')
+var fsO       =  require('fs')
+var watchpack   = require('watchpack')
 
 //---------项目工程目录---------------------
 
@@ -78,6 +79,46 @@ config.copyStatic = function(){
     debug('复制静态文件成功')
   })
 }
+
+
+config.watchStatic = function(){
+  var wp = new watchpack({
+    aggregateTimeout  :1000,
+    poll              :true
+  })
+
+  var dirs =  []
+  var files = []
+  fs.walk(config.dir_static)
+    .on('data', function (item) {
+      var stat = fsO.lstatSync(item.path)
+      if(stat.isDirectory()) {
+        dirs.push(item.path)
+      }else{
+        files.push(item.path)
+      }
+    })
+
+    .on('end', function () {
+      console.dir(`分析静态文件目录完成`)
+      wp.watch(files,dirs,Date.now()-10000)
+      console.dir(`开始监视静态文件目录`)
+      wp.on('change',(filePath,mtime)=>{
+        var len = config.dir_static.length
+        var Oldpath = filePath.substr(len,filePath.length)
+        var newPath = path.join(dst,Oldpath)
+
+        fs.removeSync(newPath)
+        var exist = fsO.existsSync(filePath)
+        if(!exist){
+          return
+        }
+        fs.copySync(filePath,newPath)
+      })
+    })
+}
+
+
 
 
 exports =module.exports = config

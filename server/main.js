@@ -69,6 +69,7 @@ if(app.get('env') !== 'production'){
   }));
 
   config.copyStatic()
+  config.watchStatic()
 }
 
 app.use('/', express.static(path.join(config.dir_proj,config.dir_dist)));
