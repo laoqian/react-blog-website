@@ -46,6 +46,7 @@ var webpackConfig ={
   output: {
     path: path.join(config.dir_proj,config.dir_dist),
     filename: '[name].bundle.js',
+    publicPath:'./',
     chunkFilename: "[name].chunk.js"
   },
   module: {
@@ -67,23 +68,23 @@ if(__DEV__){
 
   webpackConfig.module.loaders.push({
     test: /\.less$/,
-    loader: 'style!css!postcss!less'
+    loader: 'style!css?-url!postcss!less'
   })
 
   webpackConfig.module.loaders.push({
     test: /\.css/,
-    loader: 'style!css!postcss'
+    loader: 'style!css?-url!postcss'
   })
 }else if(__PROD__){
 
   webpackConfig.module.loaders.push({
     test: /\.less$/,
-    loader: ExtractTextPlugin.extract('style','css!postcss!less')
+    loader: ExtractTextPlugin.extract('style',`css?-url!postcss!less`)
   })
 
   webpackConfig.module.loaders.push({
     test: /\.css/,
-    loader: ExtractTextPlugin.extract('style','css!postcss')
+    loader: ExtractTextPlugin.extract('style','css?-url!postcss')
   })
 }
 
@@ -99,7 +100,7 @@ if(__DEV__){
     webpackConfig.entry[app].push('webpack-hot-middleware/client')
   }
 
-  //webpackConfig.devtool = 'source-map';
+  webpackConfig.devtool = 'source-map';
   webpackConfig.output.publicPath= config.dir_public
 
   webpackConfig.plugins.push(new webpack.NoErrorsPlugin())
@@ -130,7 +131,7 @@ webpackConfig.module.loaders.push(
   { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
   { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
   { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+  { test: /\.(png|jpg|gif)$/,loader: 'url?limit=8192&name=[path][name].[ext]' }
 )
 /* eslint-enable */
 

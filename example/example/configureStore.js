@@ -2,6 +2,7 @@ import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 import {filiter_reducer,user_reducer,menu_reducer,page_reducer} from './reducer.js';
+import fetch from  'isomorphic-fetch'
 
 
 const rootReducer = combineReducers({
@@ -12,16 +13,44 @@ const rootReducer = combineReducers({
 });
 
 
+//异步ajax中间件
+const fetchMiddleware = store => next => action => {
+  console.log('ajax 请求开始')
+  if(!action.uri){
+    return next(action)
+  }
+
+  console.log('ajax 请求开始')
+
+  fetch(action.uri)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      console.log('success----------')
+      console.log(response)
+    })
+    .catch(err=>{
+      console.log('err-----------')
+      console.log(err)
+    })
+}
+
+console.log(typeof  fetchMiddleware)
+
+
 if(__DEV__){
   var DevTools = require( '../public/componet/DevTools')
   var createStoreWithMiddleware = compose(
     applyMiddleware(thunk),
+    applyMiddleware(fetchMiddleware),
     DevTools.instrument()
   )(createStore);
 
 }else{
   var createStoreWithMiddleware = compose(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
+    applyMiddleware(fetchMiddleware)
   )(createStore);
 }
 

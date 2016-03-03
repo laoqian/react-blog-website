@@ -12,7 +12,8 @@ const ADMIN_URL = 'https://localhost/admin/user_search'
 export function username_chg_action(username){
   return {
     type:USERNAME_CHG,
-    username
+    username,
+    uri:'./userchange'
   }
 }
 
