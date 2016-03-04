@@ -105,9 +105,9 @@ config.watchStatic = function(){
     })
 
     .on('end', function () {
-      console.dir(`分析静态文件目录完成`)
+      console.error(`分析静态文件目录完成`)
       wp.watch(files,dirs,Date.now()-10000)
-      console.dir(`开始监视静态文件目录`)
+      console.error(`开始监视静态文件目录`)
 
 
       //显示node内存使用情况
