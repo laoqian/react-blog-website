@@ -79,6 +79,10 @@ if(app.get('env') !== 'production'){
       chunkModules : false,
       colors : true
     },
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: true
+    },
     hot:true,
     noInfo: false,
     quiet:false
