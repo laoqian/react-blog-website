@@ -13,14 +13,14 @@ var parseurl = require('parseurl')
 var RedisStore = require('connect-redis')(session)
 var debug = require('debug')('server')
 
-var cp = require('child_process')
-var process = require('process')
-
-//异常监控
-process.on('uncaughtException', function (err) {
-  console.log('导致异常的错误: ' + err);
-});
-
+//var cp = require('child_process')
+//var process = require('process')
+//
+////异常监控
+//process.on('uncaughtException', function (err) {
+//  console.log('导致异常的错误: ' + err);
+//});
+//
 
 
 //开启redis服务器
@@ -46,10 +46,10 @@ app.use(session({
   secret: '88199',
   resave: false,
   saveUninitialized: true,
-  store: new RedisStore({
-    host:'127.0.0.1',
-    port:'6379'
-  }),
+  //store: new RedisStore({
+  //  host:'127.0.0.1',
+  //  port:'6379'
+  //}),
   cookie:{
     maxAge:5000 //超时时间
   }
@@ -78,10 +78,6 @@ if(app.get('env') !== 'production'){
       chunks : false,
       chunkModules : false,
       colors : true
-    },
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: true
     },
     hot:true,
     noInfo: false,

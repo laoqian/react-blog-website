@@ -42,12 +42,10 @@ class App extends  Component{
 
 
 if(__DEV__){
-  var DevTools = require( '../public/componet/DevTools')
   render(
     <Provider store={store}>
       <div>
         <App />
-        <DevTools />
       </div>
     </Provider>,
     document.getElementById('root')

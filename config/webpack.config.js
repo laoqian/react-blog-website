@@ -46,15 +46,13 @@ var webpackConfig ={
   output: {
     path: path.join(config.dir_proj,config.dir_dist),
     filename: '[name].bundle.js',
-    publicPath:'./',
-    chunkFilename: "[name].chunk.js"
+    publicPath:'/static/'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         loaders: [ 'babel' ],
-        exclude: /node_modules/,
         include: config.dir_src
       }
     ]
@@ -100,7 +98,7 @@ if(__DEV__){
     webpackConfig.entry[app].push('webpack-hot-middleware/client')
   }
 
-  webpackConfig.devtool = 'source-map';
+  //webpackConfig.devtool = 'source-map';
   webpackConfig.output.publicPath= config.dir_public
 
   webpackConfig.plugins.push(new webpack.NoErrorsPlugin())
