@@ -8,9 +8,20 @@ import Header from './containers/header';
 import Footer from './containers/footer';
 import BlogList from './containers/bloglist';
 import NewTheme from './containers/newth';
-
+import {UPDATE_TIME} from './actions/action'
 
 const store = configureStore();
+
+
+(function App_init(){
+  setInterval(()=>{
+    store.dispatch({
+      type:UPDATE_TIME
+    })
+  },1000)
+
+})()
+
 
 class PROJ_MNG  extends Component{
   render() {

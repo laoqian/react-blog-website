@@ -2,14 +2,21 @@ import{
   EXPLORE_CHANGE,
   MENU_CLICK,
   TURN_PAGE,
-  USERNAME_CHG
+  USERNAME_CHG,
+  UPDATE_TIME
 } from './../actions/action.js'
 
 import init from './../init.js'
 import immutable from 'immutable'
+import moment from 'moment'
 
 
-var web_path = ['于其先得网络日志','首页']
+
+
+var web_path = [
+    {name:'于其先得网络日志',link:'/'},
+    {name:'首页',link:'/'},
+]
 
 export function path_reducer(state = web_path, action) {
   switch (action.type) {
@@ -18,37 +25,17 @@ export function path_reducer(state = web_path, action) {
   }
 }
 
+moment.locale('zh-cn');//设置为中文
 
-export function menu_reducer(state = init.menu.get(), action) {
+export function update_time_reducer(state = web_path, action) {
   switch (action.type) {
-    case MENU_CLICK:
-      init.menu.subChangeStateById(action.id,true)
-      return init.menu.get();
+    case UPDATE_TIME:
     default:
-      return state
+      return moment().format('YYYY年MMMMDo,ah:mm:ss')
+
   }
 }
 
-export function filiter_reducer(state=init.bar.get(), action){
-     switch (action.type){
-       case EXPLORE_CHANGE:
-         return action.explore
-       case USERNAME_CHG:
-         init.bar.set('用户名','value',action.username)
-         return init.bar.get()
-       default:
-           return state
-     }
-}
-
-export function user_reducer(state=init.user_tab, action){
-  switch (action.type){
-    case EXPLORE_CHANGE:
-      return action.explore
-    default:
-      return state
-  }
-}
 
 
 let pages  = immutable.Map(init.pages)

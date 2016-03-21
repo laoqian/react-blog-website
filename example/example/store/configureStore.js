@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import {path_reducer,filiter_reducer,user_reducer,menu_reducer,page_reducer} from './../reducers/reducer.js';
+import {path_reducer,update_time_reducer} from './../reducers/reducer.js';
 import fetch from  'isomorphic-fetch'
 
 
 const rootReducer = combineReducers({
-  web_path:path_reducer
+  web_path:path_reducer,
+  time:update_time_reducer
 });
 
 

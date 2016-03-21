@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router'
 
 
 
@@ -53,28 +54,46 @@ class Menus extends Component {
 
     return (
       <div className="right-box">
-        <ul>
-          {
-            cls.map(cl=>(
-              <li>
-                {cl}
-              </li>
-            ))
-          }
-        </ul>
+        <div className="flex box-raduis">
+          <h2 className="box-title">
+            文章分类
+          </h2>
+          <ul >
+            {
+              cls.map(cl=>(
+                <li>
+                  <Link to="/">{cl}</Link>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div className="flex box-raduis">
+          <h2 className="box-title">
+            关于我
+          </h2>
+          <img src="./res/yu.jpg" alt=""/>
+          <ul>
+            <li><Link to="/">个人简介</Link></li>
+            <li>
+              <span>{'文章:'+'122  '}</span>
+              <Link to="/">留言</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }
 }
 
-var clas = ['个人随想','演员的自我修养','演员的自我修养','演员的自我修养','演员的自我修养']
+var clas = ['个人随想','演员的自我修养','做一个有逼格的人','如何当一个合格的流氓','演员的自我修养']
 var art = {
   title:'我的个人随想',
   content:'这就是我的第一篇文章',
   time:'2016年3月21日15:08',
   author:'于其先',
   skim:100,
-  reply:33,
+  reply:33
 }
 
 

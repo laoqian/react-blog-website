@@ -10,7 +10,7 @@ class Header extends Component {
         <div>
           {
             this.props.path.map(path=>(
-              <label>{path}&raquo;</label>
+              <label><Link to={path.link}>{path.name}</Link>&raquo;</label>
             ))
           }
         </div>
