@@ -1,7 +1,7 @@
 body{
   margin: 0;
   padding: 0;
-  background: #f8f8d5;
+  background: #f6f6f6;
 }
 
 *{
@@ -15,6 +15,9 @@ input{
 
 a{
   text-decoration: none;
+  &:hover{
+    color:red;
+  }
 }
 
 ul{
@@ -40,15 +43,17 @@ input,select,button{
 
 .media-item{
   width: 1200px;
+  background: #fff;
 }
 
 .header{
-  height: 32px;
-  margin-top:48px;
+  height: 60px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  padding: 32px 10px 0 10px;
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px;
-  margin-bottom: 5px;
 
   span:nth-last-child(1){
     margin: 0 5px;
@@ -68,6 +73,7 @@ input,select,button{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: #f6f6f6;
 }
 
 .group-item{

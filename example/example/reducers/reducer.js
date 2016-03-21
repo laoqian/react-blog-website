@@ -31,15 +31,12 @@ export function update_time_reducer(state = web_path, action) {
   switch (action.type) {
     case UPDATE_TIME:
     default:
-      return moment().format('YYYY年MMMMDo,ah:mm:ss')
-
+      return moment().format('YYYY年MMMDo,ah:mm:ss')
   }
 }
 
 
-
 let pages  = immutable.Map(init.pages)
-
 
 export function page_reducer(state=pages.toJS(), action){
   switch (action.type){
