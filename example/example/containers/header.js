@@ -5,18 +5,15 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="media-item header">
+      <div className="flex media-item header">
         <div>
-          <i className="icon-flag"></i>
-          欢迎使用木鱼后台管理系统
           {
             this.props.path.map(path=>(
-            <span>
-              {path} ss
-            </span>
+              <label>{path}&raquo;</label>
             ))
           }
         </div>
+        <a Link="art-post">发表</a>
       </div>
     )
   }

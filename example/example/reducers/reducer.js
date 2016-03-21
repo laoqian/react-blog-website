@@ -3,15 +3,15 @@ import{
   MENU_CLICK,
   TURN_PAGE,
   USERNAME_CHG
-} from './action.js'
+} from './../actions/action.js'
 
-import init from './init.js'
+import init from './../init.js'
 import immutable from 'immutable'
 
 
 var web_path = ['于其先得网络日志','首页']
 
-export function path_reducer(state = init.menu.get(), action) {
+export function path_reducer(state = web_path, action) {
   switch (action.type) {
     default:
       return state
