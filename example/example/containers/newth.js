@@ -19,7 +19,7 @@ class NewTheme extends Component {
 
   post_art(){
     this.props.art_post_action(this.editor.getContent())
-  }
+  } 
 
   render() {
     let style = {
