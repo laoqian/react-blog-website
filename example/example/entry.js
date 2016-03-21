@@ -1,4 +1,4 @@
-import './styles.less'
+import './index.less'
 import ReactDom, { render } from 'react';
 import React, { Component, PropTypes } from 'react'
 import { Router, Route, browserHistory,Link } from 'react-router'
@@ -17,8 +17,6 @@ class PROJ_MNG  extends Component{
     return (
       <div className="wrapper">
         <Header/>
-        <MainLeft/>
-        {this.props.children|| <ProjSeach/>}
       </div>
     )
   }
