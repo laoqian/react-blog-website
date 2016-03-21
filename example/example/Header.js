@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 class Header extends Component {
 
@@ -8,6 +9,13 @@ class Header extends Component {
         <div>
           <i className="icon-flag"></i>
           欢迎使用木鱼后台管理系统
+          {
+            this.props.path.map(path=>(
+            <span>
+              {path} ss
+            </span>
+            ))
+          }
         </div>
       </div>
     )
@@ -15,5 +23,23 @@ class Header extends Component {
 }
 
 
+Header.propTypes = {
+  path: PropTypes.array.isRequired,
+};
 
-export default Header;
+
+function mapStateToProps(state){
+  return{
+    path:state.web_path
+  }
+}
+
+function mapActionToProps(dispatch){
+  return{}
+}
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(Header);
+

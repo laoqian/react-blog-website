@@ -98,7 +98,7 @@ if(__DEV__){
     webpackConfig.entry[app].push('webpack-hot-middleware/client')
   }
 
-  //webpackConfig.devtool = 'source-map';
+  webpackConfig.devtool = 'source-map';
   webpackConfig.output.publicPath= config.dir_public
 
   webpackConfig.plugins.push(new webpack.NoErrorsPlugin())

@@ -15,7 +15,7 @@ const store = configureStore();
 class PROJ_MNG  extends Component{
   render() {
     return (
-      <div className="wrapper">
+      <div className="flex">
         <Header/>
       </div>
     )

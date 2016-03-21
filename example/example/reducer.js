@@ -9,6 +9,16 @@ import init from './init.js'
 import immutable from 'immutable'
 
 
+var web_path = ['于其先得网络日志','首页']
+
+export function path_reducer(state = init.menu.get(), action) {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
+
 export function menu_reducer(state = init.menu.get(), action) {
   switch (action.type) {
     case MENU_CLICK:
