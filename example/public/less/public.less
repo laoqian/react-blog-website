@@ -8,6 +8,18 @@ body{
   font-size: 13px;
 }
 
+input{
+  margin: 0;
+  padding: 0;
+}
+
+input,select,button{
+
+  &:focus{
+    outline: none;
+  }
+}
+
 
 .flex{
   display: flex;
@@ -41,8 +53,6 @@ body{
   }
 }
 
-
-
 .footer{
   height: 64px;
   margin-top: 10px;
@@ -52,10 +62,26 @@ body{
   justify-content: center;
 }
 
+.group-item{
+  height: 30px;
+  width: 320px;
 
-input,select,button{
+  span{
+    width: 30%;
+    height: 100%;
+    background: #ddd;
+    border: solid 1px #ccc;
+    border-right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-  &:focus{
-    outline: none;
+  input{
+    width: 70%;
+    height: 100%;
+    padding-left: 5px;
+    border: solid 1px #ccc;
+    border-left:0;
   }
 }

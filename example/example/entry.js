@@ -7,6 +7,8 @@ import configureStore from './store/configureStore';
 import Header from './containers/header';
 import Footer from './containers/footer';
 import BlogList from './containers/bloglist';
+import NewTheme from './containers/newth';
+
 
 const store = configureStore();
 
@@ -22,7 +24,17 @@ class PROJ_MNG  extends Component{
   }
 }
 
-
+class ArtPost  extends Component{
+  render() {
+    return (
+      <div className="flex wrapper">
+        <Header/>
+        <NewTheme/>
+        <Footer/>
+      </div>
+    )
+  }
+}
 
 
 class App extends  Component{
@@ -30,7 +42,7 @@ class App extends  Component{
     return (
       <Router history={browserHistory}>
         <Route path="/" component={PROJ_MNG}/>
-        <Route path="/art-post" component={PROJ_MNG}/>
+        <Route path="/art-post" component={ArtPost}/>
       </Router>
     )
   }
@@ -38,10 +50,12 @@ class App extends  Component{
 
 
 if(__DEV__){
+  var DevTools = require( '../public/componet/DevTools')
   render(
     <Provider store={store}>
       <div>
         <App />
+        <DevTools/>
       </div>
     </Provider>,
     document.getElementById('root')

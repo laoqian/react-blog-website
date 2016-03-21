@@ -6,11 +6,7 @@ import fetch from  'isomorphic-fetch'
 
 
 const rootReducer = combineReducers({
-  web_path:path_reducer,
-  mainMenu:menu_reducer,
-  explore:filiter_reducer,
-  user_tab:user_reducer,
-  pages:page_reducer
+  web_path:path_reducer
 });
 
 
@@ -39,14 +35,12 @@ const fetchMiddleware = store => next => action => {
   return next(action)
 }
 
-console.log(typeof fetchMiddleware)
-
 
 if(__DEV__){
- // var DevTools = require( '../public/componet/DevTools')
+  var DevTools = require( '../../public/componet/DevTools')
   var createStoreWithMiddleware = compose(
     applyMiddleware(thunk),
-    applyMiddleware(fetchMiddleware)
+    DevTools.instrument()
   )(createStore);
 
 }else{

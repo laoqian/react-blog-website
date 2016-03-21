@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router'
 
 class Header extends Component {
 
@@ -13,7 +14,7 @@ class Header extends Component {
             ))
           }
         </div>
-        <a Link="art-post">发表</a>
+        <Link to="art-post">发表</Link>
       </div>
     )
   }
