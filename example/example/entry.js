@@ -23,7 +23,7 @@ const store = configureStore();
 })()
 
 
-class PROJ_MNG  extends Component{
+class Index  extends Component{
   render() {
     return (
       <div className="flex wrapper">
@@ -52,7 +52,7 @@ class App extends  Component{
   render(){
     return (
       <Router history={browserHistory}>
-        <Route path="/" component={PROJ_MNG}/>
+        <Route path="/" component={Index}/>
         <Route path="/art-post" component={ArtPost}/>
       </Router>
     )
