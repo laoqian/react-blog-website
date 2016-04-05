@@ -16,7 +16,7 @@ class Article extends Component {
           {art.content}
         </p>
         <p>
-          <a href="#">继续阅读全文&raquo;</a>
+          <Link to="/article">继续阅读全文&raquo;</Link>
         </p>
         <div className="art-info">
           <span>{"作者:"+art.author}</span>

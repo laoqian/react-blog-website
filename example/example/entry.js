@@ -4,11 +4,12 @@ import { Router, Route, browserHistory,Link } from 'react-router'
 import { Provider } from 'react-redux';
 import { createHistory } from 'history'
 import configureStore from './store/configureStore';
-import Header from './containers/header';
-import Footer from './containers/footer';
-import BlogList from './containers/bloglist';
-import NewTheme from './containers/newth';
-import {UPDATE_TIME} from './actions/action'
+import Header 		 from  './containers/header';
+import Footer 		 from  './containers/footer';
+import BlogList 	 from  './containers/bloglist';
+import NewTheme 	 from  './containers/newth';
+import Article 	     from  './containers/article';
+import {UPDATE_TIME} from  './actions/action'
 
 const store = configureStore();
 
@@ -47,13 +48,27 @@ class ArtPost  extends Component{
   }
 }
 
+class ArtDisplay  extends Component{
+  render() {
+    return (
+      <div className="flex wrapper">
+        <Header/>
+        <Article/>
+        <Footer/>
+      </div>
+    )
+  }
+}
+
+
 
 class App extends  Component{
   render(){
     return (
       <Router history={browserHistory}>
-        <Route path="/" component={Index}/>
-        <Route path="/art-post" component={ArtPost}/>
+        <Route path="/"         component=  {Index}/>
+        <Route path="/art-post" component=  {ArtPost}/>
+		<Route path="/article"  component=  {ArtDisplay}/>
       </Router>
     )
   }
