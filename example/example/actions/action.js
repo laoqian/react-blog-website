@@ -9,11 +9,12 @@ export const UPDATE_TIME         =   '获取时间'
 
 
 
-export function art_post_action(article){
+export function art_post_action(title,content){
   return {
     type:ART_POST,
-    art:article,
-    uri:'./article_post'
+    ajax_type:'post',
+    article:{title,content},
+    uri:'/article_post'
   }
 }
 

@@ -18,7 +18,14 @@ class NewTheme extends Component {
   }
 
   post_art(){
-    this.props.art_post_action(this.editor.getContent())
+    let title   =  this.refs.new_title.value;
+    let content = this.editor.getContent();
+
+    if(title =='' || content==''){
+      return;
+    }
+
+    this.props.art_post_action(title,content)
   }
 
   render() {
@@ -30,7 +37,7 @@ class NewTheme extends Component {
       <div className="flex media-item editor">
         <div className="flex title group-item">
           <span>主题:</span>
-          <input type="text" placeholder="111"/>
+          <input ref="new_title" type="text" placeholder="111"/>
         </div>
           <script id={this.props.id} style={style} name="content" type="text/plain"/>
         <div>

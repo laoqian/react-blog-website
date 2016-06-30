@@ -15,12 +15,16 @@ const rootReducer = combineReducers({
 const fetchMiddleware = store => next => action => {
   console.log('ajax 请求开始')
 
+  if(action.ajax_type ==undefined){
+    return next(action);
+  }
+
   $.post(action.uri,
-    action.art,
+    action.article,
     function(data,status){
-    console.log(data);}
-  );
-  return next(action)
+    console.log(data);
+      next(action);
+    });
 }
 
 
