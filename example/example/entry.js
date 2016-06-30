@@ -14,14 +14,14 @@ import {UPDATE_TIME} from  './actions/action'
 const store = configureStore();
 
 
-(function App_init(){
-  setInterval(()=>{
-    store.dispatch({
-      type:UPDATE_TIME
-    })
-  },1000)
-
-})()
+//(function App_init(){
+//  setInterval(()=>{
+//    store.dispatch({
+//      type:UPDATE_TIME
+//    })
+//  },1000)
+//
+//})()
 
 
 class Index  extends Component{

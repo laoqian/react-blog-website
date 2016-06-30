@@ -13,7 +13,7 @@ export function art_post_action(username){
   return {
     type:ART_POST,
     art:username,
-    uri:'./post_art'
+    uri:'./article_post'
   }
 }
 

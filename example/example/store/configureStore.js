@@ -41,6 +41,7 @@ if(__DEV__){
   var DevTools = require( '../../public/componet/DevTools')
   var createStoreWithMiddleware = compose(
     applyMiddleware(thunk),
+    applyMiddleware(fetchMiddleware),
     DevTools.instrument()
   )(createStore);
 

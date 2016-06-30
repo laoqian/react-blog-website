@@ -57,7 +57,14 @@ exports = module.exports = function router_init(app){
   }
 
   app.use('/userchange',user_change)
+  app.use('/article_post',article_post)
 }
+
+
+function article_post(req,res){
+   console.log(req.body);
+}
+
 
 
 function user_change(req,res){
