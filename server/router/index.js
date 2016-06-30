@@ -62,7 +62,8 @@ exports = module.exports = function router_init(app){
 
 
 function article_post(req,res){
-   console.log(req.body);
+    console.log(req.body);
+    res.send({status:0});
 }
 
 

@@ -54,6 +54,10 @@ var webpackConfig ={
         test: /\.js$/,
         loaders: [ 'babel' ],
         include: config.dir_src
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json']
       }
     ]
   },

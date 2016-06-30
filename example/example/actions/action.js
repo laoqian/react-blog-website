@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+
 
 export const MENU_CLICK       =   '菜单点击';
 export const MENU_LINK        =   '加载页面';
@@ -9,10 +9,10 @@ export const UPDATE_TIME         =   '获取时间'
 
 
 
-export function art_post_action(username){
+export function art_post_action(article){
   return {
     type:ART_POST,
-    art:username,
+    art:article,
     uri:'./article_post'
   }
 }

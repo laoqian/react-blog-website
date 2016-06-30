@@ -3,7 +3,7 @@
  */
 import  {Menu} from '../public/lib/menu.js'
 import  {Explore} from '../public/lib/explore.js'
-import fetch from  'isomorphic-fetch'
+
 
 var init={}
 var menuArr =[

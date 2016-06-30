@@ -2,7 +2,7 @@ import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 import {path_reducer,update_time_reducer} from './../reducers/reducer.js';
-import fetch from  'isomorphic-fetch'
+import $ from 'jquery';
 
 
 const rootReducer = combineReducers({
@@ -15,24 +15,11 @@ const rootReducer = combineReducers({
 const fetchMiddleware = store => next => action => {
   console.log('ajax 请求开始')
 
-  fetch(action.uri,{
-    body:'123123',
-    method:'post'
-  })
-    .then(function(response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-     return response.json()
-    })
-    .then(data=>{
-      console.log(data)
-    })
-    .catch(err=>{
-      console.log('err-----------')
-      console.log(err)
-    })
-
+  $.post(action.uri,
+    action.art,
+    function(data,status){
+    console.log(data);}
+  );
   return next(action)
 }
 
