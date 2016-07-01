@@ -9,19 +9,39 @@ import Footer 		 from  './containers/footer';
 import BlogList 	 from  './containers/bloglist';
 import NewTheme 	 from  './containers/newth';
 import Article 	     from  './containers/article';
-import {UPDATE_TIME} from  './actions/action'
+import {UPDATE_TIME,LOAD_ARTICLE} from  './actions/action'
+import $ from 'jquery';
+
 
 const store = configureStore();
 
 
-//(function App_init(){
-//  setInterval(()=>{
-//    store.dispatch({
-//      type:UPDATE_TIME
-//    })
-//  },1000)
-//
-//})()
+function  load_article_list(){
+  $.get('/get_article_list',
+    function(data,status){
+      console.log(data);
+      if(data.status==true){
+        store.dispatch({
+          type:LOAD_ARTICLE,
+          art_list:data.rows
+        });
+
+        console.log('加载成功')
+      }else{
+        console.log(data.info);
+      }
+    });
+}
+
+(function App_init(){
+  setInterval(()=>{
+    store.dispatch({
+      type:UPDATE_TIME
+    })
+  },1000)
+
+  load_article_list();
+})()
 
 
 class Index  extends Component{

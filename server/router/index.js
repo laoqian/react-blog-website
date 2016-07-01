@@ -5,7 +5,7 @@
 var fs = require('fs')
 var path = require('path')
 var debug = require('debug')('server:router')
-
+var server ={};
 
 function import_view(dir_path){
   var files  = fs.readdirSync(dir_path)
@@ -51,24 +51,34 @@ function reactViewsGet(dir){
 exports = module.exports = function router_init(app){
   var config  = app.get('config')
   var views = reactViewsGet(config.dir_html)
-  
+
+  server = app;
   for(var html in views){
     app.get(`/${html}`,views[html])
   }
 
-  app.use('/userchange',user_change)
+  app.use('/get_article_list',get_article_list)
   app.use('/article_post',article_post)
 }
 
 
 function article_post(req,res){
-    console.log(req.body);
-    res.send({status:0});
+    var pool =server.get('pool');
+    var model = pool.get_model('article');
+    var artile = req.body;
+    artile.author ='老千12345';
+    model.add(artile,ret=>{
+      console.log(ret.info);
+      res.send(ret);
+    });
 }
 
 
 
-function user_change(req,res){
-  console.log('user_change')
-  res.send({data:'hello'})
+function get_article_list(req,res){
+  var pool =server.get('pool');
+  var model = pool.get_model('article');
+  model.select(ret=>{
+    res.send(ret);
+  });
 }

@@ -1,13 +1,14 @@
 import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import {path_reducer,update_time_reducer} from './../reducers/reducer.js';
+import {path_reducer,update_time_reducer,load_article_reducer} from './../reducers/reducer.js';
 import $ from 'jquery';
 
 
 const rootReducer = combineReducers({
   web_path:path_reducer,
-  time:update_time_reducer
+  time:update_time_reducer,
+  art_list:load_article_reducer
 });
 
 

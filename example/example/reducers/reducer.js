@@ -3,7 +3,8 @@ import{
   MENU_CLICK,
   TURN_PAGE,
   USERNAME_CHG,
-  UPDATE_TIME
+  UPDATE_TIME,
+  LOAD_ARTICLE
 } from './../actions/action.js'
 
 import init from './../init.js'
@@ -56,3 +57,14 @@ export function page_reducer(state=pages.toJS(), action){
       return state
   }
 }
+
+export function load_article_reducer(state = [], action) {
+  switch (action.type) {
+    case LOAD_ARTICLE:
+      console.log(action);
+      return action.art_list;
+    default:
+      return state;
+  }
+}
+

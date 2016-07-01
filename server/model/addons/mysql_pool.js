@@ -10,7 +10,7 @@ var option ={
   user     : 'root',
   password : '',
   port     : '3306',
-  database : 'eb'
+  database : 'rb'
 };
 
 
@@ -19,8 +19,19 @@ function createMysqlPool(options){
     options = option;
   }
 
-  return __mysql.createPool(options);
+  var pool = __mysql.createPool(options);
+
+
+  pool.get_model = function get_model(name){
+    var model = require('../'+name+'-model.js');
+    return new model(pool);
+  }
+
+  return pool;
 }
+
+
+
 
 
 exports = module.exports = createMysqlPool;

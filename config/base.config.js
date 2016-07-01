@@ -17,7 +17,7 @@ var option ={
   user     : 'root',
   password : '',
   port     : '3306',
-  database : 'eb'
+  database : 'rb'
 };
 
 var dir ={
@@ -136,9 +136,9 @@ config.watchStatic = function(){
         fs.copySync(filePath,newPath)
       })
     })
-
-    var child_process = require("child_process");
-    child_process.exec(`start http://${config.server_host}:${config.server_port}/${config.index}`);
+    //
+    //var child_process = require("child_process");
+    //child_process.exec(`start http://${config.server_host}:${config.server_port}/${config.index}`);
 }
 
 

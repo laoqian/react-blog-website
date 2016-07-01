@@ -179,7 +179,7 @@ Model.prototype.validation = function(event){
 
 
 Model.prototype.create = function(post,cb){
-  this.data = post_parse(post);
+  this.data = post;
   if(!this.data){
     return cb({status:false,info:'解析post参数失败'});
   }
@@ -189,8 +189,9 @@ Model.prototype.create = function(post,cb){
 
 Model.prototype.__create = function(event){
 
-    this.validation(event).then((event,result)=>{
-      this.serialcallback(event, {status:true,data:event.serial.valid_data});
+  console.log(event);
+    this.validation(event).then((result)=>{
+      this.serialcallback(event, result);
     }).catch(err=>this.serialcallback(event,err));
 
 };
@@ -279,7 +280,7 @@ Model.prototype.limit = function(str){
 
 
 Model.prototype.select = function(col,cb){
-  if(typeof col ==-'string'){
+  if(typeof col == 'string'){
     this.sqlObj.select = col;
   }else{
     this.sqlObj.select = '*';
