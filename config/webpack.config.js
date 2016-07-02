@@ -162,7 +162,7 @@ webpackConfig.plugins.push(new webpack.DefinePlugin({
 webpackConfig.externals = {
   react               :  'React',
   'react-dom'         :  'var window.ReactDom',
-  'react-router'      :  'var window.ReactRouter',
+  //'react-router'      :  'var window.ReactRouter',
   'react-redux'       :  'var window.ReactRedux',
   redux               :  'Redux',
   history             :  'History',

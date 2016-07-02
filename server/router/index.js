@@ -53,9 +53,11 @@ exports = module.exports = function router_init(app){
   var views = reactViewsGet(config.dir_html)
 
   server = app;
-  for(var html in views){
-    app.get(`/${html}`,views[html])
-  }
+  //for(var html in views){
+  //  app.get(`/${html}`,views[html])
+  //}
+
+  app.get('/',views.example);
 
   app.get('/get_article_list',get_article_list)
   app.post('/article_post',article_post)

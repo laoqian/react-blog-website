@@ -2,21 +2,21 @@ import './index.less'
 import ReactDom, { render ,Component, PropTypes} from 'react';
 import { Router, Route, browserHistory,Link } from 'react-router'
 import { Provider } from 'react-redux';
-import { createHistory } from 'history'
 import configureStore from './store/configureStore';
 import Header 		   from  './containers/header';
 import Footer 		   from  './containers/footer';
 import BlogList 	   from  './containers/bloglist';
 import NewTheme 	   from  './containers/newth';
 import Reading 	     from  './containers/reading';
-import * as action_type from  './define'
+import * as action_type from  './action_type'
+
 
 
 import {app_init} from './init'
 
 const store = configureStore();
 
-
+console.log(browserHistory)
 
 
 app_init(store);

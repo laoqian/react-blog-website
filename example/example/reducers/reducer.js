@@ -1,8 +1,8 @@
 import init from './../init.js'
 import immutable from 'immutable'
 import moment from 'moment'
-import * as action_type from  '../define'
-
+import * as action_type   from  '../action_type'
+import { browserHistory } from 'react-router'
 
 
 
@@ -63,13 +63,19 @@ export function load_article_list_reducer(state = [], action) {
   }
 }
 export function get_article_reducer(state = [], action) {
+  let data = action.data
   switch (action.type) {
     case action_type.GET_ARTICLE:
-      let data = action.data;
       if(data.status==true){
         return data.rows[0];
       }
       return [];
+    case action_type.POST_ARTICLE:
+      console.log(browserHistory);
+      if(data.status==true){
+        browserHistory.push(`/reading/${data.sqlinfo.rows.insertId}`);
+      }
+      return state;
     default:
       return state;
   }
