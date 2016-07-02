@@ -20,12 +20,21 @@ const fetchMiddleware = store => next => action => {
     return next(action);
   }
 
-  $.post(action.uri,
-    action.article,
-    function(data,status){
-    console.log(data);
-      next(action);
-    });
+  if(action.ajax_type=='post'){
+    $.post(action.uri,
+      action.data,
+      function(data,status){
+        console.log(data);
+        next(action);
+      });
+  }else if(action.ajax_type=='get'){
+    $.get(action.uri,
+      function(data,status){
+        console.log(data);
+        next(action);
+      });
+  }
+
 }
 
 

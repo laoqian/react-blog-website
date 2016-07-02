@@ -3,7 +3,8 @@
  */
 import  {Menu} from '../public/lib/menu.js'
 import  {Explore} from '../public/lib/explore.js'
-
+import $ from 'jquery'
+import {UPDATE_TIME,LOAD_ARTICLE} from  './actions/action'
 
 var init={}
 var menuArr =[
@@ -59,4 +60,32 @@ init.pages = {
 }
 
 
-export default init
+function  load_article_list(store){
+  $.get('/get_article_list',
+    function(data,status){
+      if(data.status==true){
+        store.dispatch({
+          type:LOAD_ARTICLE,
+          art_list:data.rows
+        });
+      }else{
+        console.log(data.info);
+      }
+    });
+}
+
+function timer_init(store){
+  setInterval(()=>{
+    store.dispatch({
+      type:UPDATE_TIME
+    })
+  },1000)
+}
+
+
+init.app_init = function (store){
+  load_article_list(store);
+  //timer_init(store);
+}
+
+export default init;

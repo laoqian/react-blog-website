@@ -61,7 +61,6 @@ export function page_reducer(state=pages.toJS(), action){
 export function load_article_reducer(state = [], action) {
   switch (action.type) {
     case LOAD_ARTICLE:
-      console.log(action);
       return action.art_list;
     default:
       return state;

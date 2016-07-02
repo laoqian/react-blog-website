@@ -1,48 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
+import Article  from '../components/article'
 
 
-
-class Article extends Component {
-
-  render() {
-    let article = this.props.article;
-
-    return (
-      <div className="art">
-        <h2>
-          {article.title}
-        </h2>
-        <p>
-          {article.content}
-        </p>
-        <p>
-          <Link to="/article">继续阅读全文&raquo;</Link>
-        </p>
-        <div className="art-info">
-          <span>{"作者:"+article.author}</span>
-          <span>{"发表于:"+article.createtime}</span>
-          <span>{"浏览:"+article.skim}</span>
-          <span>{"回复:"+article.reply}</span>
-        </div>
-      </div>
-    )
-  }
-}
 
 class Profile extends Component {
 
   render() {
     var art_list = this.props.art_list
 
-
-    console.log('渲染文章列表');
-    console.log(art_list);
     if(!art_list||art_list.length==0){
       return (
         <div className="left-box">
-          等待加载文章列表.....
+           等待加载文章列表.....
         </div>
       )
     }else{
@@ -106,8 +77,6 @@ var clas = ['个人随想','演员的自我修养','做一个有逼格的人','�
 class BlogList extends Component {
 
   render() {
-
-    console.log(this.props);
     return (
       <div className="flex media-item">
         <Profile art_list ={this.props.art_list}/>

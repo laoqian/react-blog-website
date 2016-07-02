@@ -343,7 +343,7 @@ function createMysqlSelectString(table,sqlObj){
 
   sql = `select ${sqlObj.select} from ${table}`;
   if(typeof sqlObj.where ==='string'){
-    sql += ` where ${where}`;
+    sql += ` where ${sqlObj.where}`;
   }
 
   if(typeof sqlObj.order ==='string'){

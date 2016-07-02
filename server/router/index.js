@@ -57,11 +57,12 @@ exports = module.exports = function router_init(app){
     app.get(`/${html}`,views[html])
   }
 
-  app.use('/get_article_list',get_article_list)
-  app.use('/article_post',article_post)
+  app.post('/get_article_list',get_article_list)
+  app.get('/article_post',article_post)
+  app.post('/article_get',article_get)
 }
 
-
+//发表文章
 function article_post(req,res){
     var pool =server.get('pool');
     var model = pool.get_model('article');
@@ -73,12 +74,23 @@ function article_post(req,res){
     });
 }
 
-
-
+//获取文章列表
 function get_article_list(req,res){
   var pool =server.get('pool');
   var model = pool.get_model('article');
-  model.select(ret=>{
+  model.order('createtime desc').page('1,20').select(ret=>{
     res.send(ret);
   });
 }
+
+//获取文章列表
+function article_get(req,res){
+  var pool =server.get('pool');
+  var model = pool.get_model('article');
+  console.log(req.body)
+  model.where('id='+req.body.article_id).select(ret=>{
+    res.send(ret);
+  });
+}
+
+

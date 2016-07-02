@@ -4,44 +4,22 @@ import { Router, Route, browserHistory,Link } from 'react-router'
 import { Provider } from 'react-redux';
 import { createHistory } from 'history'
 import configureStore from './store/configureStore';
-import Header 		 from  './containers/header';
-import Footer 		 from  './containers/footer';
-import BlogList 	 from  './containers/bloglist';
-import NewTheme 	 from  './containers/newth';
-import Article 	     from  './containers/article';
-import {UPDATE_TIME,LOAD_ARTICLE} from  './actions/action'
-import $ from 'jquery';
+import Header 		   from  './containers/header';
+import Footer 		   from  './containers/footer';
+import BlogList 	   from  './containers/bloglist';
+import NewTheme 	   from  './containers/newth';
+import Reading 	     from  './containers/reading';
+import {GET_ARTICLE} from  './actions/action'
 
+
+import {app_init} from './init'
 
 const store = configureStore();
 
 
-function  load_article_list(){
-  $.get('/get_article_list',
-    function(data,status){
-      console.log(data);
-      if(data.status==true){
-        store.dispatch({
-          type:LOAD_ARTICLE,
-          art_list:data.rows
-        });
 
-        console.log('加载成功')
-      }else{
-        console.log(data.info);
-      }
-    });
-}
 
-(function App_init(){
-  setInterval(()=>{
-    store.dispatch({
-      type:UPDATE_TIME
-    })
-  },1000)
-
-  load_article_list();
-})()
+app_init(store);
 
 
 class Index  extends Component{
@@ -73,14 +51,31 @@ class ArtDisplay  extends Component{
     return (
       <div className="flex wrapper">
         <Header/>
-        <Article/>
+        <Reading/>
         <Footer/>
       </div>
     )
   }
 }
 
+const article_get= (nextState, replace) => {
+  let id = nextState.params.articleid;
+  if(id){
+   let action = {
+      type:GET_ARTICLE,
+      ajax_type:'post',
+      data:{article_id:id},
+      uri:'/article_get'
+    }
 
+
+    console.log(action);
+
+    store.dispatch(action);
+  }
+
+  return true;
+}
 
 class App extends  Component{
   render(){
@@ -88,7 +83,9 @@ class App extends  Component{
       <Router history={browserHistory}>
         <Route path="/"         component=  {Index}/>
         <Route path="/art-post" component=  {ArtPost}/>
-		<Route path="/article"  component=  {ArtDisplay}/>
+		    <Route path="/reading/articleid"
+               onEnter={article_get}
+               component=  {ArtDisplay}/>
       </Router>
     )
   }
@@ -101,7 +98,6 @@ if(__DEV__){
     <Provider store={store}>
       <div>
         <App />
-        <DevTools/>
       </div>
     </Provider>,
     document.getElementById('root')
