@@ -17,7 +17,7 @@ class Footer extends Component {
 
 
 Footer.propTypes = {
-  path: PropTypes.array.isRequired,
+  //path: PropTypes.array.isRequired,
 };
 
 

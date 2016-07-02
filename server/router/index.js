@@ -57,10 +57,11 @@ exports = module.exports = function router_init(app){
     app.get(`/${html}`,views[html])
   }
 
-  app.post('/get_article_list',get_article_list)
-  app.get('/article_post',article_post)
+  app.get('/get_article_list',get_article_list)
+  app.post('/article_post',article_post)
   app.post('/article_get',article_get)
 }
+
 
 //发表文章
 function article_post(req,res){
@@ -83,7 +84,7 @@ function get_article_list(req,res){
   });
 }
 
-//获取文章列表
+//获取文章
 function article_get(req,res){
   var pool =server.get('pool');
   var model = pool.get_model('article');

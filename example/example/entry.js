@@ -9,7 +9,7 @@ import Footer 		   from  './containers/footer';
 import BlogList 	   from  './containers/bloglist';
 import NewTheme 	   from  './containers/newth';
 import Reading 	     from  './containers/reading';
-import {GET_ARTICLE} from  './actions/action'
+import * as action_type from  './define'
 
 
 import {app_init} from './init'
@@ -60,30 +60,36 @@ class ArtDisplay  extends Component{
 
 const article_get= (nextState, replace) => {
   let id = nextState.params.articleid;
+
   if(id){
-   let action = {
-      type:GET_ARTICLE,
+    store.dispatch({
+      type:action_type.GET_ARTICLE,
       ajax_type:'post',
       data:{article_id:id},
       uri:'/article_get'
-    }
-
-
-    console.log(action);
-
-    store.dispatch(action);
+    });
   }
-
   return true;
+}
+
+function load_article_list(){
+  store.dispatch({
+    type:action_type.LOAD_ARTICLE,
+    uri:'get_article_list',
+    ajax_type:'get'
+  });
 }
 
 class App extends  Component{
   render(){
     return (
       <Router history={browserHistory}>
-        <Route path="/"         component=  {Index}/>
-        <Route path="/art-post" component=  {ArtPost}/>
-		    <Route path="/reading/articleid"
+        <Route path="/"
+               onEnter = {load_article_list}
+               component=  {Index}/>
+        <Route path="/art-post"
+               component=  {ArtPost}/>
+		    <Route path="/reading/:articleid"
                onEnter={article_get}
                component=  {ArtDisplay}/>
       </Router>

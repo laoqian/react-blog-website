@@ -1,40 +1,43 @@
 import { createStore, applyMiddleware ,compose } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
-import {path_reducer,update_time_reducer,load_article_reducer} from './../reducers/reducer.js';
+import {path_reducer,update_time_reducer,load_article_list_reducer,get_article_reducer} from './../reducers/reducer.js';
 import $ from 'jquery';
 
 
 const rootReducer = combineReducers({
   web_path:path_reducer,
   time:update_time_reducer,
-  art_list:load_article_reducer
+  art_list:load_article_list_reducer,
+  article:get_article_reducer
 });
 
 
 //异步ajax中间件
 const fetchMiddleware = store => next => action => {
-  console.log('ajax 请求开始')
 
   if(action.ajax_type ==undefined){
     return next(action);
   }
 
+  console.log(action.ajax_type+'请求开始');
+  console.log(action);
   if(action.ajax_type=='post'){
     $.post(action.uri,
       action.data,
       function(data,status){
         console.log(data);
+        action.data = data;
         next(action);
       });
   }else if(action.ajax_type=='get'){
     $.get(action.uri,
       function(data,status){
         console.log(data);
+        action.data = data;
         next(action);
       });
   }
-
 }
 
 

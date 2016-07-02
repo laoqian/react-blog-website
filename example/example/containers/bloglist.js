@@ -8,8 +8,8 @@ import Article  from '../components/article'
 class Profile extends Component {
 
   render() {
-    var art_list = this.props.art_list
-
+    let art_list = this.props.art_list
+    let index=0;
     if(!art_list||art_list.length==0){
       return (
         <div className="left-box">
@@ -21,7 +21,7 @@ class Profile extends Component {
         <div className="left-box">
           {
             art_list.map(art=>(
-              <Article article={art}/>
+              <Article article={art} key={index++} link_show={true}/>
             ))
           }
         </div>
@@ -36,17 +36,17 @@ class Menus extends Component {
 
   render() {
     let cls = this.props.cls
-
+    let index =0;
     return (
       <div className="right-box">
         <div className="flex box-raduis">
           <h2 className="box-title">
-            文章分类
+            最热文章
           </h2>
           <ul >
             {
               cls.map(cl=>(
-                <li>
+                <li key={index++}>
                   <Link to="/">{cl}</Link>
                 </li>
               ))

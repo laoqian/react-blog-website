@@ -27,7 +27,7 @@ class Reading extends Component {
     }
     return (
       <div className="flex media-item editor">
-        <Article article={this.props.article}/>
+        <Article article={this.props.article} link_show={false}/>
       </div>
     )
   }
@@ -40,7 +40,7 @@ Reading.propTypes = {
 
 function mapStateToProps(state){
   return{
-    id:'ueditor'
+    article:state.article
   }
 }
 

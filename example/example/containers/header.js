@@ -5,12 +5,13 @@ import {Link} from 'react-router'
 class Header extends Component {
 
   render() {
+    let index=0;
     return (
       <div className="flex media-item header">
         <div>
           {
             this.props.path.map(path=>(
-              <label><Link to={path.link}>{path.name}</Link>&raquo;</label>
+              <label key={index++}><Link to={path.link}>{path.name}</Link>&raquo;</label>
             ))
           }
         </div>

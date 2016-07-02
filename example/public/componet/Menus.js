@@ -13,19 +13,20 @@ class Menus extends Component {
 
   renderMenu(menus){
     let List
-
+    let index =0;
     return  menus.map(menu=>{
 
       if(!menu.link || menu.sub.length>0){
         List =
           <li onClick={this.onMenuClick.bind({change:this.props.onChange,menu})}
-              style={menu.style}>
+              style={menu.style}  key={index++} >
             {menu.prefix}{menu.name}
+
           </li>
       }else{
         List =
           <li style={menu.style}>
-            <Link className="link" to={menu.link}>{menu.prefix}{menu.name} </Link>
+            <Link className="link" to={menu.link} key={index++} >{menu.prefix}{menu.name}  </Link>
           </li>
       }
 
