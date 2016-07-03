@@ -62,7 +62,7 @@ app.use(session({
 
 ///创建连接池
 var createMysqlPool = require('./model/addons/mysql_pool');
-app.set('pool',createMysqlPool(config.sql_option))
+app.set('pool',createMysqlPool(config.sql_option));
 app.set('config',config)
 
 if(app.get('env') !== 'production'){

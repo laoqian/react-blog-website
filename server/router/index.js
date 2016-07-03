@@ -64,13 +64,17 @@ exports = module.exports = function router_init(app){
   app.post('/article_get',article_get)
 }
 
+function get_model(table){
+  var pool = server.get('pool')
+  return pool.get_model(table);
+}
 
 //发表文章
 function article_post(req,res){
-    var pool =server.get('pool');
-    var model = pool.get_model('article');
+    var model = get_model('article');
     var artile = req.body;
     artile.author ='老千12345';
+    console.log(artile);
     model.add(artile,ret=>{
       console.log(ret.info);
       res.send(ret);
@@ -79,19 +83,30 @@ function article_post(req,res){
 
 //获取文章列表
 function get_article_list(req,res){
-  var pool =server.get('pool');
-  var model = pool.get_model('article');
+  var model = get_model('article');
   model.order('createtime desc').page('1,20').select(ret=>{
+    for(i=0;i<ret.rows.length;i++){
+      ret.rows[i].createtime = model.date_format(ret.rows[i].createtime)
+    }
+
     res.send(ret);
   });
 }
 
 //获取文章
 function article_get(req,res){
-  var pool =server.get('pool');
-  var model = pool.get_model('article');
-  console.log(req.body)
+  var model = get_model('article');
+
   model.where('id='+req.body.article_id).select(ret=>{
+    if(ret.status==true){
+      var data=ret.rows[0];
+      data.skim++;
+      data.createtime = model.date_format(data.createtime);
+      var set = model.assign_row(data);
+      delete set.createtime;
+      model.where('id='+data.id).update(set);
+    }
+
     res.send(ret);
   });
 }

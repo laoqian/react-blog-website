@@ -2,7 +2,7 @@
 var EventEmitter = require("events").EventEmitter;
 var debug = require('debug')('model');
 var validate_rule = require('./validate-rule');
-
+var moment = require('moment');
 
 function Model(pool){
   EventEmitter.call(this);
@@ -62,6 +62,7 @@ Model.prototype.getNextSerialEvent = function(){
 
 Model.prototype.serialEventRun = function(serialEvent){
 
+  console.log("当前mode事件:"+serialEvent.type);
   switch(serialEvent.type) {
     case 'create':
      return this.__create(serialEvent);
@@ -218,6 +219,7 @@ Model.prototype.__add =function(event){
     }
 
     var sql =createMysqlInsertString(this.table,event.serial.valid_data);
+      console.log(sql);
     this.query(sql, (err, rows, field)=>{
       if(err){
         return this.serialcallback(event,{status:false, info:'插入失败',sqlinfo:{err,rows,field}});
@@ -301,11 +303,30 @@ Model.prototype.__select = function(event){
     if(err){
       return this.serialcallback(event,{status:false, info:'查询失败',err});
     }
-
+    for(var i=0;i<rows.length;i++){
+      var row = rows[i];
+    }
     this.serialcallback(event,{status:true,info:'查询成功', rows});
   });
-
 }
+
+Model.prototype.date_format = function (date){
+  if(!(date instanceof Date)){
+    return date;
+  }
+
+  return `${date.getFullYear()}年${date.getMonth()}月${date.getDate()}日${date.getHours()}时${date.getMinutes()}分${date.getSeconds()}秒`
+}
+
+Model.prototype.assign_row=function(row){
+  var data = {};
+  for(var key in row){
+    data[key]= row[key];
+  }
+
+  return data;
+}
+
 
 Model.prototype.delete = function (cb){
   this.addSerialEvent('delete',cb);
@@ -388,7 +409,7 @@ function createMysqlInsertString(table,data){
   var names ='',values='';
   for(var key in data){
     names+=`${key},`;
-    values+=`'${data[key]}',`;
+    values+=`"${data[key]}",`;
   }
 
   //去掉最后的逗号

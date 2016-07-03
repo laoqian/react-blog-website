@@ -6,6 +6,7 @@ class Article extends Component {
     let article = this.props.article;
     let link_show = this.props.link_show;
 
+    console.log(article);
     if(link_show===true){
       return (
         <div className="art">

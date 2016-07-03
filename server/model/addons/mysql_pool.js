@@ -23,7 +23,13 @@ function createMysqlPool(options){
 
 
   pool.get_model = function get_model(name){
-    var model = require('../'+name+'-model.js');
+    var model;
+    if(name){
+      model = require('../'+name+'-model.js');
+    }else{
+      model = require('../lib/model.js');
+    }
+
     return new model(pool);
   }
 
