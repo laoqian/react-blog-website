@@ -33,10 +33,18 @@ class Profile extends Component {
 
 
 class Menus extends Component {
-
   render() {
-    let cls = this.props.cls
+    let hots = this.props.hots
     let index =0;
+
+    if(!hots){
+      return (
+        <div className="right-box">
+          等待加载文章列表.....
+        </div>
+      )
+    }
+
     return (
       <div className="right-box">
         <div className="flex box-raduis">
@@ -45,9 +53,9 @@ class Menus extends Component {
           </h2>
           <ul >
             {
-              cls.map(cl=>(
+              hots.map(hot=>(
                 <li key={index++}>
-                  <Link to="/">{cl}</Link>
+                  <Link to="/">{hot.title}</Link>
                 </li>
               ))
             }
@@ -71,31 +79,30 @@ class Menus extends Component {
   }
 }
 
-var clas = ['个人随想','演员的自我修养','做一个有逼格的人','如何当一个合格的流氓','演员的自我修养']
-
-
 class BlogList extends Component {
 
   render() {
     return (
       <div className="flex media-item">
         <Profile art_list ={this.props.art_list}/>
-        <Menus cls={clas}/>
+        <Menus hots={this.props.hots_list}/>
       </div>
     )
   }
 }
 
 
-BlogList.propTypes = {
-  path: PropTypes.array.isRequired,
-};
+//BlogList.propTypes = {
+//  art_list: PropTypes.array.isRequired,
+//  hots_list: PropTypes.array.isRequired
+//};
 
 
 function mapStateToProps(state){
+  console.log(state);
   return{
-    path:state.web_path,
-    art_list:state.art_list
+    art_list:state.article.recent_tweenty,
+    hots_list:state.article.recent_ten_hots
   }
 }
 

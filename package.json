@@ -61,7 +61,7 @@
     "express-session": "^1.13.0",
     "fs-extra": "^0.26.4",
     "history": "^1.17.0",
-    "immutable": "^3.7.6",
+    "immutable": "^3.8.1",
     "jquery": "^3.0.0",
     "moment": "^2.11.2",
     "mysql": "^2.10.2",

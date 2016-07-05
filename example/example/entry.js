@@ -78,6 +78,12 @@ function load_article_list(){
     uri:'get_article_list',
     ajax_type:'get'
   });
+
+  store.dispatch({
+    type:action_type.LOAD_HOTS,
+    uri:'hot_article_get',
+    ajax_type:'get'
+  });
 }
 
 class App extends  Component{

@@ -1,5 +1,5 @@
 import init from './../init.js'
-import immutable from 'immutable'
+import Immutable  from 'immutable'
 import moment from 'moment'
 import * as action_type   from  '../action_type'
 import { browserHistory } from 'react-router'
@@ -50,33 +50,35 @@ export function update_time_reducer(state = web_path, action) {
 //  }
 //}
 
-export function load_article_list_reducer(state = [], action) {
-  switch (action.type) {
-    case action_type.LOAD_ARTICLE:
-      let data = action.data;
-      if(data.status==true){
-        return data.rows;
-      }
-      return [];
-    default:
-      return state;
-  }
-}
-export function get_article_reducer(state = [], action) {
+
+let articles = Immutable.Map({});
+export function article_reducer(state = articles.toJS(), action) {
   let data = action.data
+
+
   switch (action.type) {
     case action_type.GET_ARTICLE:
       if(data.status==true){
-        return data.rows[0];
+        articles = articles.merge({recent_one:data.rows[0]});
       }
-      return [];
+      return articles.toJS();
     case action_type.POST_ARTICLE:
       console.log(browserHistory);
       if(data.status==true){
         browserHistory.push(`/reading/${data.sqlinfo.rows.insertId}`);
       }
       return state;
+    case action_type.LOAD_ARTICLE:
+      if(data.status==true){
+        articles = articles.merge({recent_tweenty:data.rows});
+      }
+      return articles.toJS();
+    case action_type.LOAD_HOTS:
+      if(data.status==true){
+        articles = articles.merge({recent_ten_hots:data.rows});
+      }
+      return articles.toJS();
     default:
-      return state;
+      return {recent_one:undefined,recent_tweenty:undefined,recent_ten_hots:undefined};
   }
 }

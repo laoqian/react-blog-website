@@ -222,7 +222,7 @@ Model.prototype.__add =function(event){
       console.log(sql);
     this.query(sql, (err, rows, field)=>{
       if(err){
-        return this.serialcallback(event,{status:false, info:'插入失败',sqlinfo:{err,rows,field}});
+        return this.serialcallback(event,{status:false, info:'插入失败',sqlinfo:{err,rows,field},sql:sql});
       }
       this.serialcallback(event,{status:true,info:'插入成功', sqlinfo:{err,rows,field}});
     });
@@ -255,7 +255,7 @@ Model.prototype.__update  = function(event){
     this.query(sql, (err, rows, field)=>{
 
       if(err){
-        return this.serialcallback(event,{status:false, info:'更新失败',sqlinfo:{err,rows,field}});
+        return this.serialcallback(event,{status:false, info:'更新失败',sqlinfo:{err,rows,field},sql:sql});
       }
       this.serialcallback(event,{status:true,info:'更新成功', sqlinfo:{err,rows,field}});
 
@@ -301,7 +301,7 @@ Model.prototype.__select = function(event){
   this.query(sql, (err, rows, field)=>{
 
     if(err){
-      return this.serialcallback(event,{status:false, info:'查询失败',err});
+      return this.serialcallback(event,{status:false, info:'查询失败',err,sql:sql});
     }
     for(var i=0;i<rows.length;i++){
       var row = rows[i];
@@ -337,7 +337,7 @@ Model.prototype.__delete = function(event){
 
   this.query(sql, (err, rows, field)=>{
     if(err){
-      return this.serialcallback(event,{status:false, info:'删除失败',err});
+      return this.serialcallback(event,{status:false, info:'删除失败',err,sql:sql});
     }
 
     this.serialcallback(event,{status:true,info:'删除成功'});

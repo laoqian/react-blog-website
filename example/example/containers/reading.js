@@ -40,7 +40,7 @@ Reading.propTypes = {
 
 function mapStateToProps(state){
   return{
-    article:state.article
+    article:state.article.recent_one
   }
 }
 

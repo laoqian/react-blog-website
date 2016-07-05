@@ -60,8 +60,10 @@ exports = module.exports = function router_init(app){
   app.get('/',views.example);
 
   app.get('/get_article_list',get_article_list)
+  app.get('/hot_article_get',hot_article_get)
   app.post('/article_post',article_post)
   app.post('/article_get',article_get)
+
 }
 
 function get_model(table){
@@ -110,5 +112,11 @@ function article_get(req,res){
     res.send(ret);
   });
 }
+
+//获取文章
+function hot_article_get(req,res){
+  get_model('article').order('skim').page('1,10').select(ret=>{res.send(ret);});
+}
+
 
 
