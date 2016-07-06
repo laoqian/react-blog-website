@@ -79,13 +79,35 @@ class Menus extends Component {
   }
 }
 
+class ContentHeader extends Component {
+  render() {
+    let index=0;
+
+    return (
+      <div className="content-header flex flex-between-row">
+          <div>
+            {
+              this.props.path.map(path=>(
+                <label key={index++}><Link to={path.link}>{path.name}</Link>&raquo;</label>
+              ))
+            }
+          </div>
+          <Link to="/art-post" >发表新文章</Link>
+      </div>
+    )
+  }
+}
+
 class BlogList extends Component {
 
   render() {
     return (
-      <div className="flex media-item">
-        <Profile art_list ={this.props.art_list}/>
-        <Menus hots={this.props.hots_list}/>
+      <div className="media-item content ">
+        <ContentHeader path={this.props.path}/>
+        <div className="flex">
+          <Profile art_list ={this.props.art_list}/>
+          <Menus hots={this.props.hots_list}/>
+        </div>
       </div>
     )
   }
@@ -100,6 +122,7 @@ class BlogList extends Component {
 
 function mapStateToProps(state){
   return{
+    path:state.web_path,
     art_list:state.article.recent_tweenty,
     hots_list:state.article.recent_ten_hots
   }

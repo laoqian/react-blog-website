@@ -11,6 +11,8 @@ import Reading 	     from  './containers/reading';
 import * as action_type from  './action_type'
 import {app_init} from './init'
 
+
+
 const store = configureStore();
 app_init(store);
 class Index  extends Component{
@@ -49,6 +51,7 @@ class ArtDisplay  extends Component{
   }
 }
 
+
 const article_get= (nextState, replace) => {
   let id = nextState.params.articleid;
 
@@ -76,6 +79,8 @@ function load_article_list(){
     ajax_type:'get'
   });
 }
+
+
 
 class App extends  Component{
   render(){

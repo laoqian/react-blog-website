@@ -35,37 +35,45 @@ input,select,button{
 .flex{
   display: flex;
 }
+.flex-between-row{
+  justify-content: space-between;
+  flex-direction:row;
+}
 
-.wrapper{
+.flex-center ,.wrapper{
   flex-direction: column;
   align-items: center;
 }
 
+
 .media-item{
   width: 1200px;
-  background: #fff;
 }
 
 .header{
   height: 60px;
+  width: 100%;
+  background: lighten(#3C8DBC,10%);
   box-sizing: border-box;
-  margin-top: 5px;
-  padding: 32px 10px 0 10px;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: solid 1px;
+  padding: 5px 10px 0 10px;
+  position: fixed;
+  z-index: 999;
 
-  span:nth-last-child(1){
-    margin: 0 5px;
-  }
-
-  label:nth-last-child(1){
-    span:nth-last-child(1){
-      display: none;
-    }
-  }
+  //span:nth-last-child(1){
+  //  margin: 0 5px;
+  //}
+  //
+  //label:nth-last-child(1){
+  //  span:nth-last-child(1){
+  //    display: none;
+  //  }
+  //}
 }
 
+.content{
+  margin-top: 65px;
+  background: #f6f6f6;
+}
 .footer{
   height: 64px;
   margin-top: 10px;

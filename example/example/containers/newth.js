@@ -17,7 +17,7 @@ class NewTheme extends Component {
 
   post_art(){
     let title   =  this.refs.new_title.value;
-    let content  = CKEDITOR.instances.editor1.getData();;
+    let content  = CKEDITOR.instances[this.props.id].getData();
 
     if(title =='' || content==''){
       return;

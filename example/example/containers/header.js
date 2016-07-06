@@ -2,24 +2,58 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
 
-class Header extends Component {
 
+class Login extends Component {
   render() {
     let index=0;
     return (
-      <div className="flex media-item header">
-        <div>
-          {
-            this.props.path.map(path=>(
-              <label key={index++}><Link to={path.link}>{path.name}</Link>&raquo;</label>
-            ))
-          }
-        </div>
-        <Link to="art-post">发表</Link>
+      <div>
+        <span>用户名:</span>
+        <input placeholder="用户名" addonBefore="用户名:"/>
+        <span>密码:</span>
+        <input placeholder="密码" />
+        <input type="checkbox" placeholder="密码" />记住
+        <button >登录</button>
       </div>
     )
   }
 }
+class Logout extends Component {
+  render() {
+    let index=0;
+    return (
+      <div>
+        <button type="primary">退出</button>
+      </div>
+    )
+  }
+}
+
+
+class Header extends Component {
+  render() {
+    let index=0,log_bar;
+    if(this.props.log_state==true){
+      log_bar = <Logout/>
+    }else{
+      log_bar = <Login/>
+    }
+    return (
+      <div className="flex header flex-center">
+        <div className="flex media-item flex-between-row">
+          <div>
+            欢迎光临莲花湖畔
+          </div>
+          <div>
+            {log_bar}
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+
 
 
 Header.propTypes = {

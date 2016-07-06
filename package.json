@@ -1,6 +1,6 @@
 {
   "name": "muyu-cms",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {
     "clean": "rm -rf dist",
