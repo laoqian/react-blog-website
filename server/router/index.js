@@ -87,6 +87,7 @@ function article_post(req,res){
 function get_article_list(req,res){
   var model = get_model('article');
   model.order('createtime desc').page('1,20').select(ret=>{
+    if(ret.status!=true) return;
     for(i=0;i<ret.rows.length;i++){
       ret.rows[i].createtime = model.date_format(ret.rows[i].createtime)
     }
@@ -113,9 +114,9 @@ function article_get(req,res){
   });
 }
 
-//获取文章
+//获取热门文章
 function hot_article_get(req,res){
-  get_model('article').order('skim').page('1,10').select(ret=>{res.send(ret);});
+  get_model('article').order('skim desc').page('1,10').select(ret=>{res.send(ret);});
 }
 
 

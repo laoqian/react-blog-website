@@ -9,19 +9,10 @@ import BlogList 	   from  './containers/bloglist';
 import NewTheme 	   from  './containers/newth';
 import Reading 	     from  './containers/reading';
 import * as action_type from  './action_type'
-
-
-
 import {app_init} from './init'
 
 const store = configureStore();
-
-console.log(browserHistory)
-
-
 app_init(store);
-
-
 class Index  extends Component{
   render() {
     return (

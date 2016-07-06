@@ -110,29 +110,29 @@ config.watchStatic = function(){
       console.error(`开始监视静态文件目录`)
 
 
-      //显示node内存使用情况
-      var moment = require('moment')
-
-      moment.locale('zh-cn');
-      var stream  = process.stdout
-      var mem  ={}
-      setInterval(function () {
-        mem = process.memoryUsage()
-        stream.clearLine();
-        stream.cursorTo(0);
-        stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}--堆外内存(RSS)占用:${(mem.rss/(1024*1024)).toFixed(2)}M`);
-      }, 1000);
+      ////显示node内存使用情况
+      //var moment = require('moment')
+      //
+      //moment.locale('zh-cn');
+      //var stream  = process.stdout
+      //var mem  ={}
+      //setInterval(function () {
+      //  mem = process.memoryUsage()
+      //  stream.clearLine();
+      //  stream.cursorTo(0);
+      //  stream.write(`${moment().format('MMMM Do YYYY, h:mm:ss a')}--堆外内存(RSS)占用:${(mem.rss/(1024*1024)).toFixed(2)}M`);
+      //}, 1000);
 
       wp.on('change',(filePath,mtime)=>{
         var len = config.dir_static.length
         var Oldpath = filePath.substr(len,filePath.length)
         var newPath = path.join(dst,Oldpath)
-
         fs.removeSync(newPath)
         var exist = fsO.existsSync(filePath)
         if(!exist){
           return
         }
+        console.log('静态文件更改:替换',newPath);
         fs.copySync(filePath,newPath)
       })
     })

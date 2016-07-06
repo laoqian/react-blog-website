@@ -10,16 +10,14 @@ class NewTheme extends Component {
     this.post_art = this.post_art.bind(this)
   }
   componentDidMount() {
-    if(this.editor instanceof UE.ui.Editor){
-      this.editor.destory()
-    }
-    this.editor = new UE.ui.Editor();
-    this.editor.render(this.props.id);
+      CKEDITOR.replace( this.props.id, {
+          customConfig: '/ckeditor/config.js'
+      });
   }
 
   post_art(){
     let title   =  this.refs.new_title.value;
-    let content = this.editor.getContent();
+    let content  = CKEDITOR.instances.editor1.getData();;
 
     if(title =='' || content==''){
       return;
@@ -39,7 +37,8 @@ class NewTheme extends Component {
           <span>主题:</span>
           <input ref="new_title" type="text" placeholder="111"/>
         </div>
-          <script id={this.props.id} style={style} name="content" type="text/plain"/>
+
+          <textarea id={this.props.id} cols="40" rows="2" ></textarea>
         <div>
           <button onClick={this.post_art}>发表主题</button>
         </div>

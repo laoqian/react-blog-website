@@ -99,7 +99,6 @@ class BlogList extends Component {
 
 
 function mapStateToProps(state){
-  console.log(state);
   return{
     art_list:state.article.recent_tweenty,
     hots_list:state.article.recent_ten_hots
