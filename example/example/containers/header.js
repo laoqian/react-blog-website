@@ -38,8 +38,19 @@ class Header extends Component {
     }else{
       log_bar = <Login/>
     }
+
+    //header样式计算
+    let style = this.props.style;
+    let obj = {height:style.height+'px'};
+    let str = "flex header flex-center ";
+    if(style.class){
+      str+=style.class;
+    }
+
+    console.log(str);
+
     return (
-      <div className="flex header flex-center">
+      <div style={obj} className={str}>
         <div className="flex media-item flex-between-row">
           <div>
             欢迎光临莲花湖畔
@@ -57,13 +68,13 @@ class Header extends Component {
 
 
 Header.propTypes = {
-  path: PropTypes.array.isRequired,
+  style: React.PropTypes.object
 };
 
 
 function mapStateToProps(state){
   return{
-    path:state.web_path
+    style:state.website.header_style
   }
 }
 

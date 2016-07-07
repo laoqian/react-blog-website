@@ -20,13 +20,13 @@ class Reading extends Component {
   render() {
     if(!this.props.article){
       return (
-        <div>
+        <div >
           正在读取新的文章...
         </div>
       )
     }
     return (
-      <div className="flex media-item editor">
+      <div className="flex media-item content">
         <Article article={this.props.article} link_show={false}/>
       </div>
     )

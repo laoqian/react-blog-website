@@ -32,7 +32,7 @@ class NewTheme extends Component {
     }
 
     return (
-      <div className="flex media-item editor">
+      <div className="flex media-item editor content">
         <div className="flex title group-item">
           <span>主题:</span>
           <input ref="new_title" type="text" placeholder="111"/>

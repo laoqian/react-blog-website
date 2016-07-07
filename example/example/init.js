@@ -4,7 +4,7 @@
 import  {Menu} from '../public/lib/menu.js'
 import  {Explore} from '../public/lib/explore.js'
 import $ from 'jquery'
-import * as define from  './actions/action'
+import * as define from  './action_type'
 
 var init={}
 
@@ -19,6 +19,13 @@ function timer_init(store){
 
 init.app_init = function (store){
   //timer_init(store);
+
+
+  window.onscroll = function(){
+      store.dispatch({
+        type:define.PAGE_SCROLL
+      })
+  }
 }
 
 export default init;

@@ -1,14 +1,16 @@
-import { createStore, applyMiddleware ,compose } from 'redux';
+/*
+*
+*
+*
+*
+**/
+
+import { createStore, applyMiddleware ,compose,combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { combineReducers } from 'redux';
-import {path_reducer,update_time_reducer,article_reducer} from './../reducers/reducer.js';
+import reducers from '../reducers/reducer.js';
 import $ from 'jquery';
 
-const rootReducer = combineReducers({
-  web_path:path_reducer,
-  time    :update_time_reducer,
-  article :article_reducer
-});
+const rootReducer = combineReducers(reducers);
 
 
 //异步ajax中间件

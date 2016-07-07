@@ -1,5 +1,4 @@
-import init from './../init.js'
-import Immutable  from 'immutable'
+import immutable  from 'immutable'
 import moment from 'moment'
 import * as action_type   from  '../action_type'
 import { browserHistory } from 'react-router'
@@ -11,7 +10,7 @@ var web_path = [
     {name:'首页',link:'/'},
 ]
 
-export function path_reducer(state = web_path, action) {
+function path_reducer(state = web_path, action) {
   switch (action.type) {
     default:
       return state
@@ -20,7 +19,7 @@ export function path_reducer(state = web_path, action) {
 
 moment.locale('zh-cn');//设置为中文
 
-export function update_time_reducer(state = web_path, action) {
+ function update_time_reducer(state = web_path, action) {
   switch (action.type) {
     case action_type.UPDATE_TIME:
     default:
@@ -28,31 +27,8 @@ export function update_time_reducer(state = web_path, action) {
   }
 }
 
-
-//let pages  = immutable.Map(init.pages)
-//
-//export function page_reducer(state=pages.toJS(), action){
-//  switch (action.type){
-//    case TURN_PAGE:
-//      let cur = state.cur;
-//      if(action.page=='pre-page'){
-//        cur>1 && cur--
-//      }else if(action.page=='next-page'){
-//        cur<state.total && cur++
-//      }else{
-//        cur = action.page
-//      }
-//
-//      let new_pages= pages.set('cur',cur)
-//      return new_pages.toJS()
-//    default:
-//      return state
-//  }
-//}
-
-
-let articles = Immutable.Map({});
-export function article_reducer(state = articles.toJS(), action) {
+let articles = immutable.Map({recent_one:undefined,recent_tweenty:undefined,recent_ten_hots:undefined});
+ function article_reducer(state = articles.toJS(), action) {
   let data = action.data
 
 
@@ -63,7 +39,6 @@ export function article_reducer(state = articles.toJS(), action) {
       }
       return articles.toJS();
     case action_type.POST_ARTICLE:
-      console.log(browserHistory);
       if(data.status==true){
         browserHistory.push(`/reading/${data.sqlinfo.rows.insertId}`);
       }
@@ -79,6 +54,39 @@ export function article_reducer(state = articles.toJS(), action) {
       }
       return articles.toJS();
     default:
-      return {recent_one:undefined,recent_tweenty:undefined,recent_ten_hots:undefined};
+      return state;
   }
 }
+
+let website_state = immutable.Map({header_style:{}});
+function website_reducer(state = website_state.toJS(), action) {
+
+  switch (action.type) {
+    case action_type.PAGE_SCROLL:
+      let postion = document.getElementsByTagName('body')[0].scrollTop;
+      let obj;
+      if(postion>5 && postion<=25){
+          obj = {header_style:{height:60-postion,class:'header-opacity'}};
+      }else if(postion>25){
+        obj = {header_style:{height:35,class:'header-opacity'}};
+      }else{
+        obj = {header_style:{height:60,class:'header-no-opacity'}};
+      }
+
+      website_state = website_state.merge(obj)
+
+      return website_state.toJS();
+    default:
+      return state;
+  }
+}
+
+
+let  reducers = {
+  web_path:path_reducer,
+  time    :update_time_reducer,
+  article :article_reducer,
+  website :website_reducer
+}
+
+export default reducers ;
