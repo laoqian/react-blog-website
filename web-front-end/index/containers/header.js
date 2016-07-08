@@ -1,26 +1,47 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
+import { reduxForm } from 'redux-form'
 
+export const fields = [ 'username', 'password','remember'];
 
 class Login extends Component {
+
+
   render() {
-    let index=0;
+    const {
+      fields: { username, password,remember},
+      handleSubmit,
+      submitting
+      } = this.props
+
     return (
-      <form className="flex login-bar">
+      <form className="flex login-bar" onSubmit={handleSubmit}>
         <span>用户名:</span>
-        <input type="text" placeholder="用户名" />
+        <input type="text" placeholder="用户名" {...username}/>
         <span>密码:</span>
-        <input type="password" placeholder="密码"  />
-        <input type="checkbox" placeholder="密码" />记住
-        <input type="submit" className="btn bg-purple btn-flat btn-xs" value="登录"/>
+        <input type="password" placeholder="密码" {...password} />
+        <input type="checkbox" placeholder="密码" {...remember}/>记住
+        <button type="button" className="btn bg-purple btn-flat btn-xs"  disabled={submitting}>登录</button>
       </form>
     )
   }
 }
+
+Login.propTypes = {
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired
+}
+
+var LoginForm  = reduxForm({
+    form: 'login',
+    fields
+})(Login)
+
 class Logout extends Component {
   render() {
-    let index=0;
     return (
       <div>
         <button type="primary">退出</button>
@@ -36,7 +57,7 @@ class Header extends Component {
     if(this.props.log_state==true){
       log_bar = <Logout/>
     }else{
-      log_bar = <Login/>
+      log_bar = <LoginForm/>
     }
 
     //header样式计算
@@ -79,6 +100,8 @@ function mapStateToProps(state){
 function mapActionToProps(dispatch){
   return{}
 }
+
+
 
 export default connect(
   mapStateToProps,

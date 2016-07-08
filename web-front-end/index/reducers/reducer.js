@@ -81,12 +81,14 @@ function website_reducer(state = website_state.toJS(), action) {
   }
 }
 
+import {reducer as formReducer} from 'redux-form';
 
 let  reducers = {
   web_path:path_reducer,
   time    :update_time_reducer,
   article :article_reducer,
-  website :website_reducer
+  website :website_reducer,
+  form :formReducer
 }
 
 export default reducers ;
