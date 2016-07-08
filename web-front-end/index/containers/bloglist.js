@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
 import Article  from '../components/article'
-
+import * as action_type from  '../action_type'
 
 
 class ArticleList extends Component {
@@ -10,23 +10,17 @@ class ArticleList extends Component {
   render() {
     let art_list = this.props.art_list
     let index=0;
-    if(!art_list||art_list.length==0){
-      return (
-        <div className="left-box">
-           等待加载文章列表.....
-        </div>
-      )
-    }else{
-      return (
-        <div className="left-box">
-          {
-            art_list.map(art=>(
-              <Article article={art} key={index++} link_show={true}/>
-            ))
-          }
-        </div>
-      )
-    }
+
+    return (
+      <div className="left-box">
+        {
+          art_list.map(art=>(
+            <Article article={art} key={index++} link_show={true}/>
+          ))
+        }
+      </div>
+    )
+
   }
 }
 
@@ -36,14 +30,6 @@ class Menus extends Component {
   render() {
     let hots = this.props.hots
     let index =0;
-
-    if(!hots){
-      return (
-        <div className="right-box">
-          等待加载文章列表.....
-        </div>
-      )
-    }
 
     return (
       <div className="right-box">
@@ -55,7 +41,7 @@ class Menus extends Component {
             {
               hots.map(hot=>(
                 <li key={index++}>
-                  <Link to="/">{hot.title}</Link>
+                  <Link to={'/reading/'+hot.id}>{hot.title}</Link>
                 </li>
               ))
             }
@@ -66,10 +52,10 @@ class Menus extends Component {
             关于我
           </h2>
           <img src="./res/yu.jpg" alt=""/>
-          <ul>
+          <ul className="resume">
             <li><Link to="/">个人简介</Link></li>
             <li>
-              <span>{'文章:'+'122  '}</span>
+              <span >{'文章:'+this.props.article_total+'  '}</span>
               <Link to="/">留言</Link>
             </li>
           </ul>
@@ -82,12 +68,29 @@ class Menus extends Component {
 
 class BlogList extends Component {
 
+  componentWillMount(){
+    let dispatch = this.props.dispatch;
+    dispatch({
+      type:action_type.LOAD_HOME_PAGE_DATA,
+      uri:'home_page_data_get',
+      ajax_type:'get'
+    });
+  }
+
   render() {
+    if(this.props.home_page_data===undefined){
+      return (
+        <div className="media-item">
+          等待加载首页数据...
+        </div>
+      )
+    }
+
     return (
       <div className="media-item">
         <div className="flex">
-          <ArticleList art_list ={this.props.art_list}/>
-          <Menus hots={this.props.hots_list}/>
+          <ArticleList art_list ={this.props.home_page_data.recent_tweenty}/>
+          <Menus hots={this.props.home_page_data.recent_ten_hots} article_total={this.props.home_page_data.article_total}/>
         </div>
       </div>
     )
@@ -103,13 +106,12 @@ class BlogList extends Component {
 
 function mapStateToProps(state){
   return{
-    art_list:state.article.recent_tweenty,
-    hots_list:state.article.recent_ten_hots
+    home_page_data:state.article.home_page_data
   }
 }
 
 function mapActionToProps(dispatch){
-  return{}
+  return{dispatch}
 }
 
 export default connect(

@@ -2,7 +2,8 @@ body{
   margin: 0;
   padding: 0;
   background: #f6f6f6;
-  font-family: "微软雅黑";
+  font-family: "Helvetica, Verdana, Arial, sans-serif";
+  letter-spacing:1px;
 }
 
 *{
@@ -16,6 +17,7 @@ input{
 
 a{
   text-decoration: none;
+  letter-spacing:1px;
   &:hover{
     color:red;
   }
@@ -87,12 +89,12 @@ input,select,button{
 
 .group-item{
   height: 30px;
-  width: 320px;
+  width: 500px;
 
   span{
     width: 30%;
     height: 100%;
-    background: #ddd;
+    background: lighten(#3C8DBC,10%);
     border: solid 1px #ccc;
     border-right:0;
     display: flex;
@@ -101,7 +103,7 @@ input,select,button{
   }
 
   input{
-    width: 70%;
+    width: 400px;
     height: 100%;
     padding-left: 5px;
     border: solid 1px #ccc;

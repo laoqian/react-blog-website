@@ -33,23 +33,6 @@ const article_get= (nextState, replace) => {
   return true;
 }
 
-function load_article_list(){
-  store.dispatch({
-    type:action_type.LOAD_ARTICLE,
-    uri:'get_article_list',
-    ajax_type:'get'
-  });
-
-  store.dispatch({
-    type:action_type.LOAD_HOTS,
-    uri:'hot_article_get',
-    ajax_type:'get'
-  });
-}
-
-
-
-
 
 class MainPage extends  Component{
     render(){
@@ -74,8 +57,7 @@ class App extends  Component{
         <div >
             <Router history={browserHistory}>
                 <Route path="/" component={MainPage}>
-                    <IndexRoute  onEnter = {load_article_list}
-                                 component={BlogList}/>
+                    <IndexRoute component={BlogList}/>
                     <Route path="/art-post"
                            component=  {NewTheme}/>
                     <Route path="/reading/:articleid"

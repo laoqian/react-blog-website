@@ -27,12 +27,17 @@ moment.locale('zh-cn');//设置为中文
   }
 }
 
-let articles = immutable.Map({recent_one:undefined,recent_tweenty:undefined,recent_ten_hots:undefined});
+let articles = immutable.Map({recent_one:undefined,home_page_data:undefined});
  function article_reducer(state = articles.toJS(), action) {
   let data = action.data
 
 
   switch (action.type) {
+    case action_type.LOAD_HOME_PAGE_DATA:
+      if(data.status==true){
+        articles = articles.merge({home_page_data:data.home_page_data});
+      }
+      return articles.toJS();
     case action_type.GET_ARTICLE:
       if(data.status==true){
         articles = articles.merge({recent_one:data.rows[0]});
@@ -72,9 +77,7 @@ function website_reducer(state = website_state.toJS(), action) {
       }else{
         obj = {header_style:{height:60,class:'header-no-opacity'}};
       }
-
       website_state = website_state.merge(obj)
-
       return website_state.toJS();
     default:
       return state;

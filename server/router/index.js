@@ -29,7 +29,6 @@ function import_view(dir_path){
     views[key] = path.join(dir_path,file)
   })
 
-    console.log(views);
   return views
 }
 
@@ -59,10 +58,10 @@ exports = module.exports = function router_init(app){
   //  app.get(`/${html}`,views[html])
   //}
 
-    console.log(views);
   app.get('/',views.index);
 
   app.get('/get_article_list',get_article_list)
+  app.get('/home_page_data_get',home_page_data_get)
   app.get('/hot_article_get',hot_article_get)
   app.post('/article_post',article_post)
   app.post('/article_get',article_get)
@@ -74,12 +73,42 @@ function get_model(table){
   return pool.get_model(table);
 }
 
+
+//发表文章
+function home_page_data_get(req,res){
+  var model = get_model('article');
+  var data = {status:true,home_page_data:{}};
+  //获取首页文章列表
+  model.order('createtime desc').page('1,20').select(ret=>{
+    if(ret.status!=true) return;
+    for(i=0;i<ret.rows.length;i++){
+      ret.rows[i].createtime = model.date_format(ret.rows[i].createtime)
+      var $ = cheerio.load(ret.rows[i].content);
+      ret.rows[i].content = $('p').html()+'...';
+    }
+    data.home_page_data.recent_tweenty = ret.rows;
+
+    //查询首页热门文章数量
+    model.order('skim desc').page('1,10').select(ret=>{
+      if(ret.status!=true) return;
+      data.home_page_data.recent_ten_hots = ret.rows;
+      //查询文章总记录
+      model.query(`select count(1) as total from ${model.table}`,(err,rows)=>{
+        if(err) return;
+        data.home_page_data.article_total = rows[0].total;
+        res.send(data);
+      })
+
+    });
+
+  });
+}
+
 //发表文章
 function article_post(req,res){
     var model = get_model('article');
     var artile = req.body;
     artile.author ='老千12345';
-    console.log(artile);
     model.add(artile,ret=>{
       console.log(ret.info);
       res.send(ret);
@@ -94,7 +123,7 @@ function get_article_list(req,res){
     for(i=0;i<ret.rows.length;i++){
       ret.rows[i].createtime = model.date_format(ret.rows[i].createtime)
       var $ = cheerio.load(ret.rows[i].content);
-      ret.rows[i].content = $('p').html();
+      ret.rows[i].content = $('p').html()+'...';
     }
 
     res.send(ret);

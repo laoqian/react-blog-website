@@ -136,8 +136,8 @@ config.watchStatic = function(){
       })
     })
     //
-    var child_process = require("child_process");
-    child_process.exec(`start http://${config.server_host}:${config.server_port}`);
+    //var child_process = require("child_process");
+    //child_process.exec(`start http://${config.server_host}:${config.server_port}`);
 }
 
 

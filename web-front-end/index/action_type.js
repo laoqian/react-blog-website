@@ -10,5 +10,6 @@ var action_type={
   POST_ARTICLE    : '提交文章',
   GET_ARTICLE     : '获取文章',
   PAGE_SCROLL      : '页面滚动事件',
+  LOAD_HOME_PAGE_DATA:'加载首页数据'
 }
 export default action_type;

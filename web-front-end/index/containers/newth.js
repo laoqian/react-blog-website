@@ -35,7 +35,7 @@ class NewTheme extends Component {
       <div className="flex media-item editor content">
         <div className="flex title group-item">
           <span>主题:</span>
-          <input ref="new_title" type="text" placeholder="111"/>
+          <input ref="new_title" type="text" placeholder="主题"/>
         </div>
 
           <textarea id={this.props.id} cols="40" rows="2" ></textarea>

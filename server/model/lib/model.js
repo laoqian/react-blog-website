@@ -219,7 +219,6 @@ Model.prototype.__add =function(event){
     }
 
     var sql =createMysqlInsertString(this.table,event.serial.valid_data);
-      console.log(sql);
     this.query(sql, (err, rows, field)=>{
       if(err){
         return this.serialcallback(event,{status:false, info:'插入失败',sqlinfo:{err,rows,field},sql:sql});
