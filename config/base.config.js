@@ -21,7 +21,7 @@ var option ={
 };
 
 var dir ={
-  main       : 'example',    //web前端工程主目录,可以任意更改，改目录应放在muyu-cms根目录下
+  main       : 'web-front-end',    //web前端工程主目录,可以任意更改，改目录应放在muyu-cms根目录下
   static     : 'static', //静态文件目录，必须放在main的根目录下
   html       : 'html'    //html文件目录，必须放在static根目录下
 }
@@ -42,7 +42,6 @@ var config  ={
   //---------------------------------
   server_host   :'localhost',
   server_port   :process.env.PORT || 5000,
-  index         : 'example',
   //---------------------------------
   //redis启动脚本
   //---------------------------------
@@ -137,8 +136,8 @@ config.watchStatic = function(){
       })
     })
     //
-    //var child_process = require("child_process");
-    //child_process.exec(`start http://${config.server_host}:${config.server_port}/${config.index}`);
+    var child_process = require("child_process");
+    child_process.exec(`start http://${config.server_host}:${config.server_port}`);
 }
 
 

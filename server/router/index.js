@@ -5,6 +5,7 @@
 var fs = require('fs')
 var path = require('path')
 var debug = require('debug')('server:router')
+var cheerio = require('cheerio')
 var server ={};
 
 function import_view(dir_path){
@@ -28,6 +29,7 @@ function import_view(dir_path){
     views[key] = path.join(dir_path,file)
   })
 
+    console.log(views);
   return views
 }
 
@@ -57,7 +59,8 @@ exports = module.exports = function router_init(app){
   //  app.get(`/${html}`,views[html])
   //}
 
-  app.get('/',views.example);
+    console.log(views);
+  app.get('/',views.index);
 
   app.get('/get_article_list',get_article_list)
   app.get('/hot_article_get',hot_article_get)
@@ -90,6 +93,8 @@ function get_article_list(req,res){
     if(ret.status!=true) return;
     for(i=0;i<ret.rows.length;i++){
       ret.rows[i].createtime = model.date_format(ret.rows[i].createtime)
+      var $ = cheerio.load(ret.rows[i].content);
+      ret.rows[i].content = $('p').html();
     }
 
     res.send(ret);

@@ -2,6 +2,7 @@ Drop DATABASE if exists rb;
 CREATE DATABASE IF NOT EXISTS rb DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 use rb;
+
 drop table if exists rb_article;
 CREATE TABLE IF NOT EXISTS `rb_article` (
 `id` int(10)not null primary key auto_increment,
