@@ -44,12 +44,12 @@ app.use(bodyParser.json())
 //使用cookie中间件
 app.use(cookieParser())
 app.use(session({
-  name:'ZUSESSIONID',
+  name:'web_sessionid',
   secret: '88199',
   resave: false,
   saveUninitialized: true,
   store: new RedisStore({
-    host:'localhost',
+    host:'127.0.0.1',
     port:'6379'
   }),
   cookie:{

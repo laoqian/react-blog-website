@@ -176,9 +176,13 @@ function user_login(req,res){
   model.where(`username="${user.username}"`).select(ret=>{
     if(ret.status==true){
       var query = ret.rows[0];
+      //登录成功
       if(query.password===user.password){
         delete query.password;
         query.signuptime = model.date_format(query.signuptime);
+
+        //生成session
+        console.log(req.session.id);
         res.send({status:true,user:query});
       }else{
         res.send({status:false,info:"密码不正确."});
