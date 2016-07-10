@@ -23,3 +23,43 @@ alter table rb_article AUTO_INCREMENT=10000;
 --   SET @skim=@skim+1
 -- END;
 insert into rb_article(title,content,author) values("我的测试文章系列","我的测试文章系列1","老板123");
+
+
+drop table if exists rb_user;
+CREATE TABLE IF NOT EXISTS `rb_user` (
+  `id` int(10)not null primary key auto_increment,
+  `username` varchar(100) not null,
+  `nickname` varchar(100) not null,
+  `password` varchar(20000) not null,
+  `signuptime` timestamp not null default current_timestamp,
+  `onlinetime` int(10) null default 0
+) ENGINE=InnoDB DEFAULT CHARSET = utf8;
+alter table rb_user AUTO_INCREMENT=10000;
+
+insert into rb_user(username,nickname,password) values("laoqian123","于老大",md5("123456"));
+
+
+
+drop table if exists rb_reply;
+CREATE TABLE IF NOT EXISTS `rb_reply` (
+  `id` int(10)not null primary key auto_increment,
+  `replyerid` varchar(100) not null,
+  `articleid` varchar(100) not null,
+  `replyerip`   varchar(100) not null,
+  `replytime` timestamp not null default current_timestamp,
+  `content`   varchar(5000) not null
+) ENGINE=InnoDB DEFAULT CHARSET = utf8;
+alter table rb_reply AUTO_INCREMENT=10000;
+
+
+
+
+
+
+
+
+
+
+
+
+

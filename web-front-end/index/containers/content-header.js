@@ -4,12 +4,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router'
-
+import $ from 'jquery'
 
 
 class ContentHeader extends Component {
     render() {
-        let index=0;
+        let index=0,newth_bar;
+
+        if(!$.isEmptyObject(this.props.user)){
+            newth_bar = <Link to="/art-post" >发表新文章</Link>;
+        }
         return (
             <div className="content-header flex flex-between-row">
                 <div>
@@ -22,7 +26,7 @@ class ContentHeader extends Component {
                             }})
                     }
                 </div>
-                <Link to="/art-post" >发表新文章</Link>
+                {newth_bar}
             </div>
         )
     }
@@ -38,7 +42,8 @@ class ContentHeader extends Component {
 
 function mapStateToProps(state){
     return{
-        path:state.web_path
+        path:state.web_path,
+        user:state.website.user
     }
 }
 

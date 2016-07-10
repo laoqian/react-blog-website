@@ -31,7 +31,6 @@ let articles = immutable.Map({recent_one:undefined,home_page_data:undefined});
  function article_reducer(state = articles.toJS(), action) {
   let data = action.data
 
-
   switch (action.type) {
     case action_type.LOAD_HOME_PAGE_DATA:
       if(data.status==true){
@@ -63,10 +62,22 @@ let articles = immutable.Map({recent_one:undefined,home_page_data:undefined});
   }
 }
 
-let website_state = immutable.Map({header_style:{}});
+let website_state = immutable.Map({header_style:{},user:{}});
 function website_reducer(state = website_state.toJS(), action) {
 
   switch (action.type) {
+    case action_type.USER_LOGIN:
+      if(action.data.status==true){
+        website_state = website_state.merge({user:action.data.user});
+      }
+
+      return website_state.toJS();
+    case action_type.USER_LOGOUT:
+      if(action.data.status==true){
+        website_state = website_state.merge({user:{}});
+      }
+
+      return website_state.toJS();
     case action_type.PAGE_SCROLL:
       let postion = document.getElementsByTagName('body')[0].scrollTop;
       let obj;

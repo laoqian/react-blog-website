@@ -7,6 +7,8 @@ var path = require('path')
 var debug = require('debug')('server:router')
 var cheerio = require('cheerio')
 var server ={};
+var crypto = require('crypto');
+
 
 function import_view(dir_path){
   var files  = fs.readdirSync(dir_path)
@@ -63,8 +65,10 @@ exports = module.exports = function router_init(app){
   app.get('/get_article_list',get_article_list)
   app.get('/home_page_data_get',home_page_data_get)
   app.get('/hot_article_get',hot_article_get)
-  app.post('/article_post',article_post)
-  app.post('/article_get',article_get)
+  app.post('/article_post' ,article_post)
+  app.post('/article_get'  ,article_get)
+  app.post('/user_login'   ,user_login)
+  app.get('/user_logout'   ,user_logout)
 
 }
 
@@ -152,6 +156,57 @@ function article_get(req,res){
 function hot_article_get(req,res){
   get_model('article').order('skim desc').page('1,10').select(ret=>{res.send(ret);});
 }
+
+
+//用户登录
+function user_login(req,res){
+  var model = get_model('user');
+
+  if(!req.body.username){
+    res.send({status:false,info:"用户名是必须的."})
+  }else if(!req.body.password){
+    res.send({status:false,info:"密码是必须的."})
+  }
+
+  var user = {username:req.body.username,password:req.body.password};
+  var md5= crypto.createHash('md5');
+  md5.update(user.password);
+  user.password = md5.digest('hex');
+
+  model.where(`username="${user.username}"`).select(ret=>{
+    if(ret.status==true){
+      var query = ret.rows[0];
+      if(query.password===user.password){
+        delete query.password;
+        query.signuptime = model.date_format(query.signuptime);
+        res.send({status:true,user:query});
+      }else{
+        res.send({status:false,info:"密码不正确."});
+      }
+    }else{
+      res.send({status:false,info:"用户名不存在."});
+    }
+  })
+}
+
+//用户退出
+function user_logout(req,res){
+  res.send({status:true});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
