@@ -53,7 +53,7 @@ app.use(session({
     port:'6379'
   }),
   cookie:{
-    maxAge:5000 //超时时间
+    maxAge:50000 //超时时间
   }
 }))
 
