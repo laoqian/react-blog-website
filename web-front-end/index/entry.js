@@ -1,6 +1,6 @@
 import './index.less'
 import ReactDom, { render ,Component, PropTypes} from 'react';
-import { Router, Route,IndexRoute , Link } from 'react-router'
+import { Router, Route,IndexRoute , Link  } from 'react-router'
 import { Provider }     from 'react-redux';
 import configureStore   from './store/configureStore';
 import Header 		    from  './containers/header';
@@ -55,6 +55,11 @@ const history = useBasename(createHashHistory)({
 });
 
 
+function enter_art_post(state,rep){
+  console.log(state);
+  console.log(rep);
+}
+
 class App extends  Component{
   render(){
     return (
@@ -63,6 +68,7 @@ class App extends  Component{
                 <Route path="/" component={MainPage}>
                     <IndexRoute component={BlogList}/>
                     <Route path="/art-post"
+                           onEnter = {enter_art_post}
                            component=  {NewTheme}/>
                     <Route path="/reading/:articleid"
                            onEnter={article_get}

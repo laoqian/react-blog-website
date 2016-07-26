@@ -64,7 +64,6 @@ exports = module.exports = function router_init(app){
 
   app.get('/get_article_list',get_article_list)
   app.get('/home_page_data_get',home_page_data_get)
-  app.get('/hot_article_get',hot_article_get)
   app.post('/article_post' ,article_post)
   app.post('/article_get'  ,article_get)
   app.post('/user_login'   ,user_login)
@@ -78,7 +77,7 @@ function get_model(table){
 }
 
 
-//发表文章
+//获取首页数据
 function home_page_data_get(req,res){
   var model = get_model('article');
   var data = {status:true,home_page_data:{}};
@@ -92,10 +91,11 @@ function home_page_data_get(req,res){
     }
     data.home_page_data.recent_tweenty = ret.rows;
 
-    //查询首页热门文章数量
+    //查询首页热门文章
     model.order('skim desc').page('1,10').select(ret=>{
       if(ret.status!=true) return;
       data.home_page_data.recent_ten_hots = ret.rows;
+
       //查询文章总记录
       model.query(`select count(1) as total from ${model.table}`,(err,rows)=>{
         if(err) return;
@@ -110,6 +110,11 @@ function home_page_data_get(req,res){
 
 //发表文章
 function article_post(req,res){
+    var user = req.session.user;
+    if(!user || !user.username){
+      return res.send({status:false,info:'请先登录'});
+    }
+
     var model = get_model('article');
     var artile = req.body;
     artile.author ='老千12345';
@@ -152,14 +157,14 @@ function article_get(req,res){
   });
 }
 
-//获取热门文章
-function hot_article_get(req,res){
-  get_model('article').order('skim desc').page('1,10').select(ret=>{res.send(ret);});
-}
-
 
 //用户登录
 function user_login(req,res){
+  var user = req.session.user;
+  if(user && user.username){
+    return res.send({status:false,info:'不能重复登录'});
+  }
+
   var model = get_model('user');
 
   if(!req.body.username){
@@ -168,7 +173,7 @@ function user_login(req,res){
     res.send({status:false,info:"密码是必须的."})
   }
 
-  var user = {username:req.body.username,password:req.body.password};
+  user = {username:req.body.username,password:req.body.password};
   var md5= crypto.createHash('md5');
   md5.update(user.password);
   user.password = md5.digest('hex');
@@ -182,7 +187,15 @@ function user_login(req,res){
         query.signuptime = model.date_format(query.signuptime);
 
         //生成session
-        console.log(req.session.id);
+        req.session.user = query;
+        req.session.save(function(err) {
+          // session saved
+          if(err){
+            res.send({status:false,info:"登录操作session失败."});
+            return console.log(err);
+          }
+          debug('保存session成功');
+        })
         res.send({status:true,user:query});
       }else{
         res.send({status:false,info:"密码不正确."});
@@ -195,7 +208,19 @@ function user_login(req,res){
 
 //用户退出
 function user_logout(req,res){
-  res.send({status:true});
+
+  //退出登录
+  delete req.session.user;
+  req.session.save(function(err) {
+    // session saved
+    if(err){
+      res.send({status:false,info:"退出时操作session失败."});
+      return console.log(err);
+    }
+    debug('保存session成功');
+  })
+
+  res.send({status:true,info:'退出登录成功'});
 }
 
 
