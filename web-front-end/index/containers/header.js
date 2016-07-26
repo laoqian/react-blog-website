@@ -83,7 +83,7 @@ var LogoutBar =  connect(
 class Header extends Component {
   render() {
     let index=0,log_bar;
-    console.log(this.props.user);
+
     if(!$.isEmptyObject(this.props.user)){
       log_bar = <LogoutBar user={this.props.user} />
     }else{

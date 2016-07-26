@@ -22,17 +22,17 @@ var router_init = require('./router');
 
 
 //开启redis服务器
-cp.execFile('startup.bat',[1,1],{cwd:path.join(__dirname,config.redis_path)},(err,stdout,stderr)=>{
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-  if (err !== null) {
-    console.log(`exec error: ${err}`);
-    throw new Error('开启redis服务器失败');
-  }else{
-    console.log('开启redis服务器成功');
-  }
-
-})
+//cp.execFile('startup.bat',[1,1],{cwd:path.join(__dirname,config.redis_path)},(err,stdout,stderr)=>{
+//  console.log(`stdout: ${stdout}`);
+//  console.log(`stderr: ${stderr}`);
+//  if (err !== null) {
+//    console.log(`exec error: ${err}`);
+//    throw new Error('开启redis服务器失败');
+//  }else{
+//    console.log('开启redis服务器成功');
+//  }
+//
+//})
 
 
 // parse application/x-www-form-urlencoded
@@ -53,7 +53,7 @@ app.use(session({
     port:'6379'
   }),
   cookie:{
-    maxAge:5000 //超时时间
+    maxAge:50000 //超时时间
   }
 }))
 
