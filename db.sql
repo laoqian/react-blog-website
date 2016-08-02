@@ -22,7 +22,11 @@ alter table rb_article AUTO_INCREMENT=10000;
 -- BEGIN
 --   SET @skim=@skim+1
 -- END;
-insert into rb_article(title,content,author) values("我的测试文章系列","我的测试文章系列1","老板123");
+insert into rb_article(title,content,author) values("我的测试文章系列1","我的测试文章系列1","老板123");
+insert into rb_article(title,content,author) values("我的测试文章系列2","我的测试文章系列1","老板123");
+insert into rb_article(title,content,author) values("我的测试文章系列3","我的测试文章系列1","老板123");
+insert into rb_article(title,content,author) values("我的测试文章系列4","我的测试文章系列1","老板123");
+insert into rb_article(title,content,author) values("我的测试文章系列5","我的测试文章系列1","老板123");
 
 
 drop table if exists rb_user;
