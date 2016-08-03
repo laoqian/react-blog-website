@@ -81,31 +81,24 @@ function get_model(table){
 function home_page_data_get(req,res){
   var model = get_model('article');
   var data = {status:true,home_page_data:{}};
-  //获取首页文章列表
-  model.order('createtime desc').page('1,20').select(ret=>{
-    if(ret.status!=true) return;
-    for(i=0;i<ret.rows.length;i++){
-      ret.rows[i].createtime = model.date_format(ret.rows[i].createtime)
-      var $ = cheerio.load(ret.rows[i].content);
-      ret.rows[i].content = $('p').html()+'...';
+
+  var sql = model.order('createtime desc').page('1,20').getSelectSql();
+  sql += model.order('skim desc').page('1,10').getSelectSql('title');
+  sql += `select count(1) as total from ${model.table};`;
+
+  model.query(sql,(err,rows)=>{
+    if(err) return;
+
+    var news = rows[0];
+    for(var i=0;i<news.length;i++){
+      news[i].createtime = model.date_format(news[i].createtime)
+      var $ = cheerio.load(news[i].content);
+      news[i].content = $('p').html()+'...';
     }
-    data.home_page_data.recent_tweenty = ret.rows;
 
-    //查询首页热门文章
-    model.order('skim desc').page('1,10').select(ret=>{
-      if(ret.status!=true) return;
-      data.home_page_data.recent_ten_hots = ret.rows;
-
-      //查询文章总记录
-      model.query(`select count(1) as total from ${model.table}`,(err,rows)=>{
-        if(err) return;
-        data.home_page_data.article_total = rows[0].total;
-        res.send(data);
-      })
-
-    });
-
-  });
+    data.home_page_data ={recent_tweenty:news,recent_ten_hots:rows[1],article_total:rows[2].total};
+    res.send(data);
+  })
 }
 
 //发表文章

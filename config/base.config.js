@@ -17,7 +17,8 @@ var option ={
   user     : 'root',
   password : '',
   port     : '3306',
-  database : 'rb'
+  database : 'rb',
+  multipleStatements:true //开启多语句同时执行功能
 };
 
 var dir ={

@@ -261,6 +261,14 @@ Model.prototype.__update  = function(event){
     });
 };
 
+Model.prototype.getUpdateSql=function(){
+  return createMysqlUpdateString(this.table,this.data,this.sqlObj.where);
+}
+
+Model.prototype.getSelectSql=function(){
+  return createMysqlSelectString(this.table,this.sqlObj);
+}
+
 
 Model.prototype.where = function(str){
   this.sqlObj.where = str;
@@ -372,7 +380,13 @@ exports = module.exports = Model;
 function createMysqlSelectString(table,sqlObj){
   var sql ='';
 
-  sql = `select ${sqlObj.select} from ${table}`;
+  if(sqlObj.select){
+    sql = `select ${sqlObj.select} from ${table}`;
+
+  }else{
+    sql = `select * from ${table}`;
+  }
+
   if(typeof sqlObj.where ==='string'){
     sql += ` where ${sqlObj.where}`;
   }
@@ -392,7 +406,7 @@ function createMysqlSelectString(table,sqlObj){
   }
 
   debug(sql);
-  return sql;
+  return sql+';';
 }
 
 
@@ -411,7 +425,7 @@ function createMysqlUpdateString(table,data,where){
   }
 
   debug(sql);
-  return sql;
+  return sql+';';
 }
 
 
@@ -428,7 +442,7 @@ function createMysqlInsertString(table,data){
 
   var sql = `insert into ${table}(${names}) values(${values})`;
   debug(sql);
-  return sql;
+  return sql+';';
 }
 
 function createMysqlDeleteString(table,where){
@@ -439,7 +453,7 @@ function createMysqlDeleteString(table,where){
   }
 
   debug(sql);
-  return sql;
+  return sql+';';
 }
 
 
