@@ -18,7 +18,12 @@ const store = configureStore();
 app_init(store);
 
 
-
+/**
+ * 获取文章根据id
+ * @param nextState
+ * @param replace
+ * @returns {boolean}
+ */
 const article_get= (nextState, replace) => {
   let id = nextState.params.articleid;
 

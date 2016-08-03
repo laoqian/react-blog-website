@@ -62,7 +62,15 @@ let articles = immutable.Map({recent_one:undefined,home_page_data:undefined});
   }
 }
 
+
 let website_state = immutable.Map({header_style:{},user:{}});
+
+/**
+ * 网站状态
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 function website_reducer(state = website_state.toJS(), action) {
 
   switch (action.type) {
@@ -94,6 +102,7 @@ function website_reducer(state = website_state.toJS(), action) {
       return state;
   }
 }
+
 
 import {reducer as formReducer} from 'redux-form';
 

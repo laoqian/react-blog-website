@@ -51,7 +51,7 @@ class Menus extends Component {
           <h2 className="box-title">
             关于我
           </h2>
-          <img src="./res/yu.jpg" alt=""/>
+          <img src="./res/yu-small.jpg" alt=""/>
           <ul className="resume">
             <li><Link to="/">个人简介</Link></li>
             <li>
