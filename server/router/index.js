@@ -96,7 +96,7 @@ function home_page_data_get(req,res){
       news[i].content = $('p').html()+'...';
     }
 
-    data.home_page_data ={recent_tweenty:news,recent_ten_hots:rows[1],article_total:rows[2].total};
+    data.home_page_data ={recent_tweenty:news,recent_ten_hots:rows[1],article_total:rows[2][0].total};
     res.send(data);
   })
 }
