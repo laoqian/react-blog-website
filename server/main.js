@@ -2,8 +2,8 @@ var path = require('path');
 var express = require('express');
 var config = require('../config/base.config');
 var bodyParser = require('body-parser')
-var cookieParser  = require('cookie-parser')
-var session  = require('express-session')
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
 var parseurl = require('parseurl')
 var RedisStore = require('connect-redis')(session)
 var cp = require('child_process')
@@ -22,13 +22,13 @@ var router_init = require('./router');
 
 
 //开启redis服务器
-cp.execFile('startup.bat',[1,1],{cwd:path.join(__dirname,config.redis_path)},(err,stdout,stderr)=>{
+cp.execFile('startup.bat', [1, 1], {cwd: path.join(__dirname, config.redis_path)}, (err, stdout, stderr)=> {
   console.log(`stdout: ${stdout}`);
   console.log(`stderr: ${stderr}`);
   if (err !== null) {
     console.log(`exec error: ${err}`);
     throw new Error('开启redis服务器失败');
-  }else{
+  } else {
     console.log('开启redis服务器成功');
   }
 
@@ -36,7 +36,7 @@ cp.execFile('startup.bat',[1,1],{cwd:path.join(__dirname,config.redis_path)},(er
 
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 
 // parse application/json
 app.use(bodyParser.json())
@@ -44,16 +44,16 @@ app.use(bodyParser.json())
 //使用cookie中间件
 app.use(cookieParser())
 app.use(session({
-  name:'web_sessionid',
+  name: 'web_sessionid',
   secret: '88199',
   resave: false,
   saveUninitialized: true,
   store: new RedisStore({
-    host:'127.0.0.1',
-    port:'6379'
+    host: '127.0.0.1',
+    port: '6379'
   }),
-  cookie:{
-    maxAge:50000 //超时时间
+  cookie: {
+    maxAge: 50000 //超时时间
   }
 }))
 
@@ -64,10 +64,10 @@ app.use(session({
 
 ///创建连接池
 var createMysqlPool = require('./model/addons/mysql_pool');
-app.set('pool',createMysqlPool(config.sql_option));
-app.set('config',config)
+app.set('pool', createMysqlPool(config.sql_option));
+app.set('config', config)
 
-if(app.get('env') !== 'production'){
+if (app.get('env') !== 'production') {
   var webpackConfig = require('../config/webpack.config.js');
   var webpack = require('webpack');
   var compiler = webpack(webpackConfig);
@@ -77,13 +77,13 @@ if(app.get('env') !== 'production'){
     publicPath: webpackConfig.output.publicPath,
     //lazy:true,
     stats: {
-      chunks : false,
-      chunkModules : false,
-      colors : true
+      chunks: false,
+      chunkModules: false,
+      colors: true
     },
-    hot:true,
+    hot: true,
     noInfo: false,
-    quiet:false
+    quiet: false
   }));
 
   app.use(require("webpack-hot-middleware")(compiler, {
@@ -96,13 +96,11 @@ if(app.get('env') !== 'production'){
 
 }
 
-app.use('/', express.static(path.join(config.dir_proj,config.dir_dist)));
+app.use('/', express.static(path.join(config.dir_proj, config.dir_dist)));
 router_init(app)
 
 
-
-
-app.listen(config.server_port, function(err) {
+app.listen(config.server_port, function (err) {
   if (err) {
     console.log(err);
     return;

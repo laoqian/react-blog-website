@@ -1,5 +1,5 @@
 {
-  "name": "muyu-cms",
+  "name": "react-blog",
   "version": "0.2.0",
   "description": "一个利用webpack加载的react redux实现的后台系统",
   "scripts": {

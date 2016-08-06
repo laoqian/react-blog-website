@@ -34,6 +34,7 @@ class Login extends Component {
         <button type="button" className="btn bg-purple btn-flat btn-xs"  onClick={handleSubmit(this.login.bind(this))}>
          登录
         </button>
+        <Link to="signup" style={{color:"black"}}>注册</Link>
       </form>
     )
   }

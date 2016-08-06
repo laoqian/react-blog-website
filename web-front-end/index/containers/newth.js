@@ -19,9 +19,13 @@ class NewTheme extends Component {
     let title   =  this.refs.new_title.value;
     let content  = CKEDITOR.instances[this.props.id].getData();
 
-    if(title =='' || content==''){
-      return;
+    if(title ==''){
+      return  $.jBox.tip("标题不能为空");
     }
+    if(content.length<10){
+      return  $.jBox.tip("文章内容不能少于10个字");
+    }
+
 
     this.props.art_post_action(title,content)
   }
