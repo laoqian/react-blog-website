@@ -15,13 +15,7 @@ CREATE TABLE IF NOT EXISTS `rb_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table rb_article AUTO_INCREMENT=10000;
 
---
--- create trigger article_sel
--- before SELECT on rb_article
--- for each row
--- BEGIN
---   SET @skim=@skim+1
--- END;
+
 insert into rb_article(title,content,author) values("我的测试文章系列1","<p>我的测试文章系列1</p>","老板123");
 insert into rb_article(title,content,author) values("我的测试文章系列2","<p>我的测试文章系列1</p>","老板123");
 insert into rb_article(title,content,author) values("我的测试文章系列3","<p>我的测试文章系列1</p>","老板123");
@@ -34,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `rb_user` (
   `id` int(10)not null primary key auto_increment,
   `username` varchar(100) not null,
   `nickname` varchar(100) not null,
-  `password` varchar(20000) not null,
+  `password` varchar(100) not null,
   `signuptime` timestamp not null default current_timestamp,
   `onlinetime` int(10) null default 0
 ) ENGINE=InnoDB DEFAULT CHARSET = utf8;

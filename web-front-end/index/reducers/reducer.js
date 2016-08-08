@@ -44,7 +44,9 @@ function article_reducer(state = articles.toJS(), action) {
     case action_type.POST_ARTICLE:
       if (data.status == true) {
         $.jBox.tip("发表成功，跳转到浏览页");
-        browserHistory.push(`/reading/${data.sqlinfo.rows.insertId}`);
+        setTimeout(()=>{
+          browserHistory.push(`/reading/${data.sqlinfo.rows.insertId}`);
+        },3000)
       } else {
         $.jBox.tip(data.info);
       }
@@ -92,7 +94,7 @@ function website_reducer(state = website_state.toJS(), action) {
       let postion = document.getElementsByTagName('body')[0].scrollTop;
       let obj;
       if (postion > 5 && postion <= 25) {
-        obj = {header_style: {height: 60 - postion, class: 'header-opacity'}};
+        obj = { header_style: { height: 60 - postion, class: 'header-opacity' } };
       } else if (postion > 25) {
         obj = {header_style: {height: 35, class: 'header-opacity'}};
       } else {
