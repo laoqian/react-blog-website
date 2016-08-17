@@ -41,7 +41,7 @@ const fetchMiddleware = store => next => action => {
 
 
 if(__DEV__){
-  var DevTools = require( '../../public/componet/DevTools')
+  var DevTools = require( '../components/DevTools')
   var createStoreWithMiddleware = compose(
     applyMiddleware(thunk),
     applyMiddleware(fetchMiddleware),

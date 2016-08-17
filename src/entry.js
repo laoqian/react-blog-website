@@ -89,7 +89,7 @@ class App extends Component {
 
 
 if (__DEV__) {
-    // var DevTools = require('../public/componet/DevTools')
+    // var DevTools = require('../componets/DevTools')
     render(
         <Provider store={store}>
             <App />

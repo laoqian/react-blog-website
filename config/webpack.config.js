@@ -17,29 +17,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var __DEV__ = config['__DEV__']
 var __PROD__ = config['__PROD__']
 
+var index = [];
+index.push(path.join(__dirname,'../src/entry.js'));
+var entry ={index};
 
-var entry = {};
-
-var srcPath = config.dir_src;
-var dirs = fs.readdirSync(srcPath);
-
-dirs.forEach(dir => {
-  var stat = fs.lstatSync(path.join(srcPath, dir))
-  if (!stat.isDirectory()) {
-    return;
-  }
-
-  var files = fs.readdirSync(path.join(srcPath, dir))
-  files.forEach(file => {
-    var reg = /entry.js$/
-    if (!file.match(reg)) {
-      return;
-    }
-
-    entry[dir] = [];
-    entry[dir].push(path.join(srcPath, dir, file));
-  })
-})
+console.log(entry)
 
 var webpackConfig = {
   entry,

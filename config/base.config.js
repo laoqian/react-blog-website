@@ -55,8 +55,6 @@ config.sql_option = option
 config.dir_proj =  path.resolve(__dirname,'../')
 config.dir_src  = path.resolve(config.dir_proj,dir.main)
 config.dir_static  = path.resolve(config.dir_src,dir.static)
-config.dir_html  = path.resolve(config.dir_static,dir.html)
-config.dir_html_dist = path.resolve(__dirname,'../',config.dir_dist,dir.static,dir.html)
 
 
 //-------------------------------
