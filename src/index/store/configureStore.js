@@ -19,7 +19,7 @@ const fetchMiddleware = store => next => action => {
     return next(action);
   }
 
-  console.log(action.ajax_type+'请求开始');
+  // console.log(action.ajax_type+'请求开始');
 
   if(action.ajax_type=='post'){
     $.post(action.uri,

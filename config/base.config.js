@@ -22,7 +22,7 @@ var option ={
 };
 
 var dir ={
-  main       : 'web-front-end',    //web前端工程主目录,可以任意更改，改目录应放在muyu-cms根目录下
+  main       : 'src',    //web前端工程主目录,可以任意更改，改目录应放在muyu-cms根目录下
   static     : 'static', //静态文件目录，必须放在main的根目录下
   html       : 'html'    //html文件目录，必须放在static根目录下
 }
@@ -35,7 +35,7 @@ var config  ={
   //项目结构
   //-------------------
   dir_server  :  path.resolve(__dirname,'../server'),
-  dir_dist    :  'dist/',
+  dir_dist    :  'static/',
   dir_public  :  '/',
 
   //---------------------------------

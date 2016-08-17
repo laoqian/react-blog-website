@@ -16,7 +16,7 @@
   },
   "betterScripts": {
     "development": {
-      "command": "npm run clean && node  -r dotenv/config --harmony server/main",
+      "command": "node  -r dotenv/config --harmony server/main",
       "env": {
         "NODE_ENV": "development"
       }
@@ -113,7 +113,7 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
-    "webpack-dev-middleware": "^1.5.1",
-    "webpack-hot-middleware": "^2.2.0"
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }

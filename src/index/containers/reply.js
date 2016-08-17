@@ -5,36 +5,23 @@ import Article  from '../components/article'
 
 
 
-class Reading extends Component {
+class Reply extends Component {
   constructor(props){
     super()
   }
-  //componentWillMount (){
-  //  let dispatch = this.props.dispatch;
-  //  let id = this.props.id;
-  //
-  //  console.log('渲染阅读页面');
-  //
-  //}
 
   render() {
-    if(!this.props.article){
-      return (
-        <div >
-          正在读取新的文章...
-        </div>
-      )
-    }
+
     return (
-      <div className="flex media-item content">
-        <Article article={this.props.article} link_show={false}/>
+      <div className="flex media-item">
+        111111111
       </div>
     )
   }
 }
 
 
-Reading.propTypes = {
+Reply.propTypes = {
 };
 
 
@@ -53,5 +40,5 @@ function mapActionToProps(dispatch){
 export default connect(
   mapStateToProps,
   mapActionToProps
-)(Reading);
+)(Reply);
 
